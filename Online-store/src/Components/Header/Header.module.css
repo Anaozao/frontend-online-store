@@ -1,0 +1,60 @@
+.header {
+  background-color: blue;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 100px;
+}
+
+.searchDiv {
+  width: 300px;
+}
+
+.searchForm {
+  display: flex;
+  justify-content: center;
+}
+
+.searchInput {
+  border: none;
+  height: 30px;
+  min-width: 177px;
+}
+
+.searchButton {
+  background-color: white;
+  border: none;
+  height: 30px;
+  width: 30px;
+}
+
+.logoDiv {
+  width: 300px;
+  display: flex;
+  justify-content: center;
+}
+
+.cartDiv {
+  width: 300px;
+  display: flex;
+  justify-content: center;
+}
+
+.cartIcon {
+  font-size: 30px;
+}
+
+.cartNumber {
+  align-items: center;
+  background-color: rgb(102, 216, 102);
+  border-radius: 100%;
+  color: white;
+  display: flex;
+  font-size: 15px;
+  font-weight: bold;
+  justify-content: center;
+  min-height: 15px;
+  margin-left: 20px;
+  position: absolute;
+  min-width: 15px;
+}

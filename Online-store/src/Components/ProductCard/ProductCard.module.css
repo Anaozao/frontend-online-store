@@ -1,0 +1,37 @@
+.productCard {
+  background-color: white;
+  max-width: 250PX;
+  height: 300px;
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  justify-content: space-evenly;
+  margin: 20px 20px;
+  border-radius: 5px;
+  box-shadow: 2px 2px 10px black;
+}
+
+.productImage {
+  width: 100px;
+  height: 100px;
+}
+
+.productName {
+  text-align: center;
+  margin: 10px 5px;
+}
+
+.productCardButton {
+ cursor: pointer;
+ height: 30px;
+ width: 200px;
+ border: none;
+ border-radius: 2px;
+ box-shadow: 1px 1px 5px rgb(43, 46, 43);
+ background-color: rgb(116, 235, 116);
+ font-weight: bold;
+}
+
+.productPrice {
+  font-size: 20px;
+}
