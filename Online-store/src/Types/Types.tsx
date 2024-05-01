@@ -41,7 +41,7 @@ export type HomeProps = {
     thumbnail: string;
     id: string;
   }[];
-  search: string;
+  search: boolean;
   searchLoading: boolean;
   setCartItens: React.Dispatch<React.SetStateAction<never[]>>;
 }

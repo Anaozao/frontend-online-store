@@ -6,12 +6,13 @@ import React, { useEffect, useState } from 'react'
 import Home from './Pages/Home/Home'
 import { getByName, getCategoriesList } from './Utils/APIs'
 import CartPage from './Pages/CartPage/CartPage'
+import { HomeProps } from './Types/Types'
 
 function App() {
   const [searchInputValue, setSearchInputValue] = useState({search: ''})
   const [searchResults, setSearchResults] = useState({results: []})
   const [cartCount, setCartCount] = useState(0)
-  const [categories, setCategories] = useState<object[]>([])
+  const [categories, setCategories] = useState<HomeProps['categories']>([])
   const [loading, setLoading] = useState(false)
   const [search, setSearch] = useState(false)
   const [searchLoading, setSearchLoading] = useState(false)

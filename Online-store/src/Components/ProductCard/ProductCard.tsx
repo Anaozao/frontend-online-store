@@ -1,10 +1,15 @@
-import { resultsType } from '../../Pages/Home/Home';
+
 import styles from './ProductCard.module.css'
 type ProductCardProps = {
   image: string;
   name: string;
   price: number;
-  item: resultsType;
+  item: {
+    title: string;
+    price: number;
+    thumbnail: string;
+    id: string;
+  };
   setCartItens: React.Dispatch<React.SetStateAction<never[]>>
 }
 
