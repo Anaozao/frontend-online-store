@@ -1,0 +1,33 @@
+.productCard {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  margin: 15px 0;
+  border-bottom: 1px solid black;
+}
+
+.productImage {
+  width: 100px;
+}
+
+.productName {
+  width: 150px;
+  margin: 0 10px;
+}
+
+.count {
+  width: 20px;
+  height: 20px;
+  margin: 0 5px;
+  background-color: grey;
+  color: white;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.price {
+  font-size: 20px;
+  margin-left: 10px;
+}

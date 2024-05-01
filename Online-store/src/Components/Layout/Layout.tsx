@@ -4,7 +4,7 @@ import Header from "../Header/Header";
 type LayoutProps = {
   cartCount: number;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
-  onSearch: (e: React.FocusEvent<HTMLButtonElement>) => Promise<void>
+  onSearch: (e: React.FormEvent<HTMLButtonElement>) => Promise<void>
 }
 
 function Layout({cartCount, onChange, onSearch}: LayoutProps) {

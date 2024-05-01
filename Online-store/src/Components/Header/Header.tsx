@@ -1,14 +1,12 @@
 import { FaCartShopping } from "react-icons/fa6";
 import { IoSearch } from "react-icons/io5";
 import styles from './Header.module.css';
-
-type HeaderProps = {
-  cartCount: number;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onSearch: (e: React.FocusEvent<HTMLButtonElement>) => Promise<void>;
-}
+import { Link } from "react-router-dom";
+import { HiShoppingBag } from "react-icons/hi";
+import { HeaderProps } from "../../Types/Types";
 
 function Header({cartCount, onChange, onSearch}: HeaderProps) {
+
   return (
     <header className={styles.header}>
       <div className={styles.searchDiv}>
@@ -32,11 +30,15 @@ function Header({cartCount, onChange, onSearch}: HeaderProps) {
         </form>
       </div>
       <div className={styles.logoDiv}>
-        Logo e nome aqui
+        <HiShoppingBag className={styles.logo} />
+        <div className={styles.nameDiv}>
+          <h1>FRONT-END</h1>
+          <p>online store</p>
+        </div>
       </div>
       <div className={styles.cartDiv}>
-        <div className={styles.cartNumber}>{cartCount}</div>
-        <FaCartShopping className={styles.cartIcon}/>
+        <Link to='/cart' className={styles.cartNumber}>{cartCount}</Link>
+        <Link className={styles.cartLink} to='/cart'><FaCartShopping className={styles.cartIcon}/></Link>
       </div>
     </header>
   )

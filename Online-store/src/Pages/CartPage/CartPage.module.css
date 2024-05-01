@@ -1,0 +1,49 @@
+.cartSection {
+  display: flex;
+  margin: 20px 30px;
+  padding-top: 100px;
+}
+
+.cartFinishDiv {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.cartFinishDiv :nth-child(1) {
+  font-size: 25px;
+}
+
+.goBack {
+  text-decoration: none;
+  color: rgb(0, 255, 115);
+  font-size: 20px;
+
+}
+
+.goBackDiv {
+  width: 100px;
+  text-align: center;
+  box-shadow: 1px 1px 3px rgb(126, 126, 126);
+  border-radius: 3px;
+}
+
+.cartProductsDiv {
+  margin-top: 40px;
+  padding: 10px 10px;
+  background-color: white;
+  box-shadow: 1px 1px 3px rgb(126, 126, 126);
+  border-radius: 3px;
+  width: 80%;
+}
+
+.cartProductsWindow {
+  height: 100vh;
+  width: 700px;
+  background-color: rgb(212, 212, 212);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

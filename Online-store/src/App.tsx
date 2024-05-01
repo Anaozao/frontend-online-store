@@ -5,15 +5,21 @@ import Layout from './Components/Layout/Layout'
 import React, { useEffect, useState } from 'react'
 import Home from './Pages/Home/Home'
 import { getByName, getCategoriesList } from './Utils/APIs'
+import CartPage from './Pages/CartPage/CartPage'
 
 function App() {
   const [searchInputValue, setSearchInputValue] = useState({search: ''})
-  const [searchResults, setSearchResults] = useState({})
+  const [searchResults, setSearchResults] = useState({results: []})
   const [cartCount, setCartCount] = useState(0)
   const [categories, setCategories] = useState<object[]>([])
   const [loading, setLoading] = useState(false)
   const [search, setSearch] = useState(false)
   const [searchLoading, setSearchLoading] = useState(false)
+  const [cartItens, setCartItens] = useState([])
+
+  useEffect(() => {
+    setCartCount(cartItens.length)
+  }, [cartItens])
 
   useEffect(() => {
     setLoading(true)
@@ -39,7 +45,7 @@ function App() {
     ))
   }
 
-  const handleSearch = async (e: React.FocusEvent<HTMLButtonElement>) => {
+  const handleSearch = async (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault()
     setSearchLoading(true)
     try {
@@ -52,6 +58,7 @@ function App() {
       setSearch(true)
     }
   }
+
   return (
     <Routes >
       <Route 
@@ -68,8 +75,17 @@ function App() {
               results={searchResults.results}
               search={search}
               searchLoading={searchLoading}
+              setCartItens={setCartItens}
               />}
             />
+            <Route
+              path='/cart'
+              element={
+                <CartPage
+                  cartItens={cartItens}
+                  setCartItens={setCartItens}
+                />
+              }/>
       </Route>
     </Routes>
   )

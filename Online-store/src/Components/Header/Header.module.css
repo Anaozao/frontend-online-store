@@ -4,6 +4,9 @@
   justify-content: space-around;
   align-items: center;
   height: 100px;
+  position: fixed;
+  top: 0;
+  width: 100%;
 }
 
 .searchDiv {
@@ -17,21 +20,33 @@
 
 .searchInput {
   border: none;
-  height: 30px;
-  min-width: 177px;
+  height: 35px;
+  min-width: 200px;
+  text-align: center;
 }
 
 .searchButton {
   background-color: white;
   border: none;
-  height: 30px;
-  width: 30px;
+  height: 35px;
+  width: 35px;
 }
 
 .logoDiv {
   width: 300px;
   display: flex;
   justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  font-size: 80px;
+}
+
+.nameDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .cartDiv {
@@ -57,4 +72,10 @@
   margin-left: 20px;
   position: absolute;
   min-width: 15px;
+  text-decoration: none;
+}
+
+.cartLink {
+  text-decoration: none;
+  color: white;
 }

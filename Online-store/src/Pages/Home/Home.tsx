@@ -1,6 +1,7 @@
 import Loading from '../../Components/Loading/Loading';
 import ProductCard from '../../Components/ProductCard/ProductCard';
 import WaitingToSearch from '../../Components/WaitingToSearch/WaitingToSearch';
+import { HomeProps } from '../../Types/Types';
 import styles from './Home.module.css';
 
 type categoryType = {
@@ -8,15 +9,7 @@ type categoryType = {
   name: string
 }
 
-type resultsType = {
-  image: string;
-  title: string;
-  id: number
-  price: number
-  thumbnail: string
-}
-
-function Home({categories, loading, results, search, searchLoading}: any) {
+function Home({ results, categories, loading, search, searchLoading, setCartItens}: HomeProps) {
 
   console.log(results)
 
@@ -46,9 +39,11 @@ function Home({categories, loading, results, search, searchLoading}: any) {
         <section className={styles.searchedProductsSection}>
           {searchLoading && <Loading />}
           { !search ? <WaitingToSearch/> : (
-            results.map((item: resultsType) => (
+            results.map((item) => (
               <ProductCard
                 key={item.id}
+                setCartItens={setCartItens}
+                item={item}
                 image={item.thumbnail}
                 name={item.title}
                 price={item.price}
