@@ -46,7 +46,10 @@ function CartPage({cartItens, setCartItens}: CartPageProps) {
     <section className={styles.cartSection}>
       <div className={styles.cartProductsWindow}>
         <div className={styles.cartProductsDiv}>
-          <div className={styles.goBackDiv}><Link to='/' className={styles.goBack} ><TiArrowBack className={styles.goBackIcon}/> Voltar</Link></div>
+          <div className={styles.cartPageTopButtons}>
+            <Link to='/' className={styles.goBack} ><TiArrowBack className={styles.goBackIcon}/> Voltar</Link>
+            <button className={styles.clearButton} type='button' onClick={() => setCartItens([])}>Limpar</button>
+          </div>
           {uniqueItem.map((iten: cartItensProps) => (
             <CartProductsCard
               key={iten.id}

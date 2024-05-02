@@ -29,8 +29,8 @@ export const getCategoriesList = async () => {
   return data
 }
 
-export const getCategory = async (categoryId: string) => {
-  const response = await fetch(`https://api.mercadolibre.com/sites/MLB/search?category=${categoryId}`)
+export const getCategory = async (categoryId: string, offset: number) => {
+  const response = await fetch(`https://api.mercadolibre.com/sites/MLB/search?category=${categoryId}&offset=${offset}`)
   if (!response.ok) {
     throw new Error('Erro ao realizar a requisição')
   }

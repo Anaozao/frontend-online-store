@@ -22,7 +22,16 @@ function Home(
     handleCategory,
     setCartItens}: HomeProps) {
 
-  console.log(nameResults)
+   console.log(nameResults)   
+
+   const handleFilter = () => {
+    if (nameSearch) {
+      nameResults.sort((a, b) => a.price - b.price)
+    }
+    if (categorySearch) {
+      categoryResults.sort((a, b) => a.price - b.price)
+    }
+   }
 
   if(loading) return <Loading />
 
@@ -50,32 +59,41 @@ function Home(
         </div>
       </aside>
         <section className={styles.searchedProductsSection}>
-          {searchLoading && <Loading />}
+          <div className={styles.selectDiv}>
+            <select name="price-sort" id="" className={styles.selectContainer}>
+              <option disabled className={styles.selectOptions}>Ordenar por preço</option>
+              <option value="Maior" className={styles.selectOptions}>Maior</option>
+              <option value="Menor" onSelect={handleFilter} className={styles.selectOptions}>Menor</option>
+            </select>
+          </div>
+          <div className={styles.products}>
           { (!search && !searchLoading) && <WaitingToSearch/> }
           {nameSearch && (
-            nameResults.map((item) => (
+            nameResults.map((result) => result.map((item) => (
               <ProductCard
-                key={item.id}
-                setCartItens={setCartItens}
-                item={item}
-                image={item.thumbnail}
-                name={item.title}
-                price={item.price}
-              />
-            ))
+              key={item.id}
+              setCartItens={setCartItens}
+              item={item}
+              image={item.thumbnail}
+              name={item.title}
+              price={item.price}
+            />
+            )))
           )}
           {categorySearch && (
-            categoryResults.map((item) => (
+            categoryResults.map((item) => item.map((procuct) => (
               <ProductCard
-                key={item.id}
-                setCartItens={setCartItens}
-                item={item}
-                image={item.thumbnail}
-                name={item.title}
-                price={item.price}
-              />
-            ))
-          )} 
+              key={procuct.id}
+              setCartItens={setCartItens}
+              item={procuct}
+              image={procuct.thumbnail}
+              name={procuct.title}
+              price={procuct.price}
+            />
+            )))
+          )}
+          {searchLoading && <Loading />}
+          </div>
         </section>
     </section>
   )

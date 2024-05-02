@@ -18,16 +18,33 @@
 
 .goBack {
   text-decoration: none;
-  color: rgb(0, 255, 115);
+  border: none;
+  background-color: white;
+  box-shadow: 1px 1px 3px rgb(126, 126, 126);
   font-size: 20px;
+  color: rgb(0, 255, 115);
+  width: 100px;
 
 }
 
-.goBackDiv {
-  width: 100px;
+.cartPageTopButtons {
+  width: 300px;
   text-align: center;
-  box-shadow: 1px 1px 3px rgb(126, 126, 126);
+  /* box-shadow: 1px 1px 3px rgb(126, 126, 126); */
   border-radius: 3px;
+  display: flex;
+  justify-content: space-around;
+
+}
+
+.clearButton {
+  border: none;
+  background-color: white;
+  box-shadow: 1px 1px 3px rgb(126, 126, 126);
+  font-size: 20px;
+  color: rgb(0, 255, 115);
+  width: 100px;
+  cursor: pointer;
 }
 
 .cartProductsDiv {
@@ -37,6 +54,8 @@
   box-shadow: 1px 1px 3px rgb(126, 126, 126);
   border-radius: 3px;
   width: 80%;
+  height: 90%;
+  overflow-y: auto
 }
 
 .cartProductsWindow {

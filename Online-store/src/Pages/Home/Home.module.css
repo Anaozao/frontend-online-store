@@ -6,8 +6,11 @@
 }
 
 .categoriesAside {
+  /* position: fixed;
+  top:100px; */
   margin: 5px 0 0 10px;
   min-width: 300px;
+  
 }
 
 .categoryTitle {
@@ -24,6 +27,26 @@
 }
 
 .searchedProductsSection {
+  /* margin-left: 300px; */
+  flex-grow: 1;
+  display: flex;
+  flex-flow: column;
+  background-color: rgb(214, 214, 214);
+}
+
+.selectDiv {
+  width: 100%;
+  text-align: end;
+}
+
+.selectContainer {
+  margin-top: 20px;
+  margin-right: 10.5%;
+  height: 30px;
+  width: 200px;
+}
+
+.products {
   flex-grow: 1;
   display: flex;
   flex-flow: row wrap;
