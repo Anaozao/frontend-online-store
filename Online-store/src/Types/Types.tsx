@@ -52,5 +52,16 @@ export type HomeProps = {
   search: boolean;
   searchLoading: boolean;
   setCartItens: React.Dispatch<React.SetStateAction<never[]>>;
-  handleCategory: (e: string) => void
+  setResultsByCategori: React.Dispatch<React.SetStateAction<never[]>>;
+  setSearchByName: React.Dispatch<React.SetStateAction<never[]>>;
+  handleCategory: (e: string) => void;
+  setSort: React.Dispatch<React.SetStateAction<string>>;
+  sort: string;
+  setProduct: React.Dispatch<React.SetStateAction<object>>;
+}
+
+export type productDetails = {
+  title: string;
+  price: number;
+  thumbnail: string;
 }

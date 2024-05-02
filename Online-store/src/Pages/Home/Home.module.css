@@ -46,9 +46,14 @@
   width: 200px;
 }
 
-.products {
+.productsSection {
   flex-grow: 1;
   display: flex;
   flex-flow: row wrap;
   background-color: rgb(214, 214, 214);
+}
+
+.products {
+  display: flex;
+  flex-flow: row wrap;
 }

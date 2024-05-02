@@ -17,13 +17,22 @@ function CartProductsCard({quantity, name, price, image, cartItens, iten, setCar
     }
   }
 
+  const handleRemoveAll = () => {
+    const index = cartItens.filter((item) => item.id !== iten.id)
+
+    console.log(index)
+
+    setCartItens(index)
+    
+  }
+
   const handleAdd = () => {
       setCartItens((prevItens) => [...prevItens, iten])
   }
 
   return (
     <div className={styles.productCard}>
-      <span className={styles.removeItem}><RxCross2 /></span>
+      <span role='button' onClick={handleRemoveAll} className={styles.removeItem}><RxCross2 /></span>
       <img className={styles.productImage} src={image} alt={`Imagem de: ${name}`} />
       <p className={styles.productName}>{name}</p>
       <span  role='button' onClick={handleRemove} className={styles.remove}><IoRemoveOutline /></span>

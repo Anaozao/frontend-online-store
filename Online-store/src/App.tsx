@@ -6,7 +6,8 @@ import React, { useEffect, useState } from 'react'
 import Home from './Pages/Home/Home'
 import { getByName, getCategoriesList, getCategory } from './Utils/APIs'
 import CartPage from './Pages/CartPage/CartPage'
-import { HomeProps } from './Types/Types'
+import { HomeProps, productDetails } from './Types/Types'
+import ProductPage from './Pages/ProductPage/ProductPage'
 
 function App() {
   const [searchInputValue, setSearchInputValue] = useState({search: ''})
@@ -22,6 +23,8 @@ function App() {
   const [categorySearch, setCategorySearch] = useState(false)
   const [category, setCategory] = useState('')
   const [offset, setOffset] = useState(0)
+  const [sort, setSort] = useState('Menor')
+  const [product, setProduct] = useState<productDetails>({})
 
   useEffect(() => {
     setCartCount(cartItens.length)
@@ -60,7 +63,7 @@ function App() {
     try {
       const response = await getByName(searchInputValue.search, offset)
       console.log(response.results)
-      setSearchByName((prev) => [...prev, response.results])
+      setSearchByName(response.results)
     } catch (error) {
       console.error(error)
     } finally {
@@ -76,7 +79,7 @@ function App() {
     setOffset(0)
     try {
       const response = await getCategory(e, offset)
-      setResultsByCategori((prev) => [...prev, response.results])
+      setResultsByCategori(response.results)
     } catch (error) {
       console.error(error)
     } finally {
@@ -97,8 +100,7 @@ function App() {
           setNameSearch(true)
           try {
             const response = await getByName(searchInputValue.search, offset)
-            console.log(response.results)
-            setSearchByName((prev) => [...prev, response.results])
+            setSearchByName((prev) => [...prev, ...response.results])
           } catch (error) {
             console.error(error)
           } finally {
@@ -112,7 +114,7 @@ function App() {
           setNameSearch(false)
           try {
             const response = await getCategory(category, offset)
-            setResultsByCategori((prev) => [...prev, response.results])
+            setResultsByCategori((prev) => [...prev, ...response.results])
           } catch (error) {
             console.error(error)
           } finally {
@@ -151,6 +153,11 @@ function App() {
               handleCategory={handleCategory}
               nameSearch={nameSearch}
               categorySearch={categorySearch}
+              setSearchByName={setSearchByName}
+              setResultsByCategori={setResultsByCategori}
+              setSort={setSort}
+              sort={sort}
+              setProduct={setProduct}
               />}
             />
             <Route
@@ -161,6 +168,13 @@ function App() {
                   setCartItens={setCartItens}
                 />
               }/>
+            <Route
+              path={`product/${product.title}/details`}
+              element={
+                <ProductPage
+                  product={product}
+                />}
+            />  
       </Route>
     </Routes>
   )

@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import Loading from '../../Components/Loading/Loading';
 import ProductCard from '../../Components/ProductCard/ProductCard';
 import WaitingToSearch from '../../Components/WaitingToSearch/WaitingToSearch';
@@ -11,6 +12,9 @@ type categoryType = {
 
 function Home(
   { 
+    setProduct,
+    setSort,
+    sort,
     categorySearch,
     nameSearch,
     nameResults,
@@ -20,19 +24,45 @@ function Home(
     search,
     searchLoading,
     handleCategory,
-    setCartItens}: HomeProps) {
+    setCartItens,
+    setSearchByName,
+    setResultsByCategori
+  }: HomeProps) {
 
-   console.log(nameResults)   
+  const sortByPrice = (e: React.ChangeEvent<HTMLSelectElement>) => {
+      setSort(e.target.value)
+      handleSort(e.target.value)
+  }
 
-   const handleFilter = () => {
-    if (nameSearch) {
-      nameResults.sort((a, b) => a.price - b.price)
-    }
-    if (categorySearch) {
-      categoryResults.sort((a, b) => a.price - b.price)
-    }
-   }
+  const handleSort = (option: string) => {
+      if (nameSearch) {
+        const newItens = [...nameResults];
+        newItens.sort((a, b) => {
+          if (option === 'Menor') {
+            return a.price - b.price;
+          } else {
+            return b.price - a.price
+          }
+        });
+        setSearchByName(newItens)
+      }
+      if (categorySearch) {
+        const newItens = [...categoryResults];
+        newItens.sort((a, b) => {
+          if (sort === 'Maior') {
+            return a.price - b.price;
+          } else {
+            return b.price - a.price
+          }
+        });
+        setResultsByCategori(newItens)
+      }
+  }
 
+  useEffect(() => {
+
+  },[search])
+  
   if(loading) return <Loading />
 
 
@@ -59,41 +89,51 @@ function Home(
         </div>
       </aside>
         <section className={styles.searchedProductsSection}>
-          <div className={styles.selectDiv}>
-            <select name="price-sort" id="" className={styles.selectContainer}>
-              <option disabled className={styles.selectOptions}>Ordenar por preço</option>
-              <option value="Maior" className={styles.selectOptions}>Maior</option>
-              <option value="Menor" onSelect={handleFilter} className={styles.selectOptions}>Menor</option>
-            </select>
-          </div>
-          <div className={styles.products}>
           { (!search && !searchLoading) && <WaitingToSearch/> }
-          {nameSearch && (
-            nameResults.map((result) => result.map((item) => (
-              <ProductCard
-              key={item.id}
-              setCartItens={setCartItens}
-              item={item}
-              image={item.thumbnail}
-              name={item.title}
-              price={item.price}
-            />
-            )))
-          )}
-          {categorySearch && (
-            categoryResults.map((item) => item.map((procuct) => (
-              <ProductCard
-              key={procuct.id}
-              setCartItens={setCartItens}
-              item={procuct}
-              image={procuct.thumbnail}
-              name={procuct.title}
-              price={procuct.price}
-            />
-            )))
-          )}
-          {searchLoading && <Loading />}
-          </div>
+          <div className={styles.productsSection}>
+            <div className={styles.selectDiv}>
+              <select
+                onChange={sortByPrice}
+                name="price-sort"
+                defaultValue=''
+                id=""
+                className={styles.selectContainer}
+              >
+                <option value='' disabled className={styles.selectOptions}>Ordenar por preço</option>
+                <option value="Maior" className={styles.selectOptions}>Maior</option>
+                <option value="Menor" className={styles.selectOptions}>Menor</option>
+              </select>
+            </div>
+            <div className={styles.products}>
+              {nameSearch && (
+                nameResults.map((item) => (
+                  <ProductCard
+                  key={item.id}
+                  setCartItens={setCartItens}
+                  item={item}
+                  image={item.thumbnail}
+                  name={item.title}
+                  price={item.price}
+                  setProduct={setProduct}
+                />
+                ))
+              )}
+              {categorySearch && (
+                categoryResults.map((procuct) => (
+                  <ProductCard
+                  key={procuct.id}
+                  setCartItens={setCartItens}
+                  item={procuct}
+                  image={procuct.thumbnail}
+                  name={procuct.title}
+                  price={procuct.price}
+                  setProduct={setProduct}
+                />
+                ))
+              )}
+              {searchLoading && <Loading />}
+              </div>
+            </div>
         </section>
     </section>
   )

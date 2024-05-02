@@ -6,6 +6,14 @@
   border-bottom: 1px solid black;
 }
 
+.removeItem {
+  margin: 0 10px
+}
+
+.removeItem :active {
+  color: rgba(128, 128, 128, 0.575);
+}
+
 .productImage {
   width: 100px;
 }

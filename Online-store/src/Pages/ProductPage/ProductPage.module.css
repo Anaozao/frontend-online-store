@@ -1,0 +1,66 @@
+.productPageSection {
+  padding-top: 100px;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(212, 212, 212);
+}
+
+.productDiv {
+  display: flex;
+  margin-top: 50px;
+  margin-left: 30px;
+  gap: 3rem ;
+  width: 100%;
+  height: 100vw;
+}
+
+.nameAndImage {
+  background-color: white;
+  max-width: 700px;
+  max-height: 700px;
+  display: flex;
+  flex-flow: column;
+  box-shadow: 1px 1px 5px black;
+  align-items: center;
+  gap: 8rem;
+}
+
+.productName {
+  margin: 10px 20px 0 20px 
+}
+
+.productImg {
+  width: 300px;
+  height: 300px;
+  /* margin-top: auto; */
+}
+
+.infoAndPrice {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  max-height: 100vh;
+}
+
+.productInfoDiv {
+  height: 50%;
+  margin: 30px 0 0 30px;
+}
+
+.productAddDiv {
+  display: flex;
+  margin: 20px 0 0 30px;
+  gap: 2rem;
+  align-items: center;
+}
+
+.addRemoveDiv {
+  display: flex;
+  gap: 5px;
+}
+
+.addToCart {
+  width: 200px;
+  height: 30px;
+}

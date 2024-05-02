@@ -1,4 +1,5 @@
 
+import { Link } from 'react-router-dom';
 import styles from './ProductCard.module.css'
 type ProductCardProps = {
   image: string;
@@ -11,9 +12,10 @@ type ProductCardProps = {
     id: string;
   };
   setCartItens: React.Dispatch<React.SetStateAction<never[]>>
+  setProduct: React.Dispatch<React.SetStateAction<object>>
 }
 
-function ProductCard({image, name, price, item, setCartItens}:ProductCardProps) {
+function ProductCard({setProduct, image, name, price, item, setCartItens}:ProductCardProps) {
 
   const handleAddToCart = () => {
     setCartItens((prevItens) => [...prevItens, item])
@@ -21,9 +23,11 @@ function ProductCard({image, name, price, item, setCartItens}:ProductCardProps) 
 
   return (
     <div className={styles.productCard}>
-      <img className={styles.productImage} src={image} alt={`Imagem de ${name}`} />
-      <h4 className={styles.productName}>{name}</h4>
-      <p className={styles.productPrice}>R${price}</p>
+      <Link className={styles.productLink} to={`/product/${name}/details`} onClick={() => setProduct(item)}>
+        <img className={styles.productImage} src={image} alt={`Imagem de ${name}`} />
+        <h4 className={styles.productName}>{name}</h4>
+        <p className={styles.productPrice}>R${price}</p>
+      </Link>
       <button
         className={styles.productCardButton}
         type='button'
