@@ -64,7 +64,7 @@ function CartPage({cartItens, setCartItens}: CartPageProps) {
       { cartItens.length < 1 ? <EmptyCart /> :
         <div className={styles.cartFinishDiv}>
           <p>Valor total da compra:</p>
-          <p>R${totalValue}</p>
+          <p>R${Number(totalValue).toFixed(2)}</p>
           <button type='button'>Finalizar compra</button>
         </div>
       }

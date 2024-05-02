@@ -30,12 +30,20 @@ export type HeaderProps = {
 }
 
 export type HomeProps = {
+  categorySearch: boolean;
+  nameSearch: boolean;
   categories: {
     id: string;
     name: string;
   }[];
   loading: boolean;
-  results: {
+    nameResults: {
+    title: string;
+    price: number;
+    thumbnail: string;
+    id: string;
+  }[];
+  resultsByCategory: {
     title: string;
     price: number;
     thumbnail: string;
@@ -44,4 +52,5 @@ export type HomeProps = {
   search: boolean;
   searchLoading: boolean;
   setCartItens: React.Dispatch<React.SetStateAction<never[]>>;
+  handleCategory: (e: string) => void
 }

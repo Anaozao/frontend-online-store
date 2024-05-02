@@ -29,13 +29,13 @@ function Header({cartCount, onChange, onSearch}: HeaderProps) {
             </button>
         </form>
       </div>
-      <div className={styles.logoDiv}>
+      <Link to='/' className={styles.logoDiv}>
         <HiShoppingBag className={styles.logo} />
         <div className={styles.nameDiv}>
           <h1>FRONT-END</h1>
           <p>online store</p>
         </div>
-      </div>
+      </Link>
       <div className={styles.cartDiv}>
         <Link to='/cart' className={styles.cartNumber}>{cartCount}</Link>
         <Link className={styles.cartLink} to='/cart'><FaCartShopping className={styles.cartIcon}/></Link>

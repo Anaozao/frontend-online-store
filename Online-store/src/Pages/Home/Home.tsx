@@ -9,9 +9,20 @@ type categoryType = {
   name: string
 }
 
-function Home({ results, categories, loading, search, searchLoading, setCartItens}: HomeProps) {
+function Home(
+  { 
+    categorySearch,
+    nameSearch,
+    nameResults,
+    resultsByCategory,
+    categories,
+    loading,
+    search,
+    searchLoading,
+    handleCategory,
+    setCartItens}: HomeProps) {
 
-  console.log(results)
+  console.log(nameResults)
 
   if(loading) return <Loading />
 
@@ -27,6 +38,7 @@ function Home({ results, categories, loading, search, searchLoading, setCartIten
           { categories.map((category: categoryType) => (
             <p
               role='button'
+              onClick={() => handleCategory(category.id)}
               key={category.id}
               id={category.id}
               className={styles.categoryName}
@@ -38,17 +50,19 @@ function Home({ results, categories, loading, search, searchLoading, setCartIten
       </aside>
         <section className={styles.searchedProductsSection}>
           {searchLoading && <Loading />}
-          { !search ? <WaitingToSearch/> : (
-            results.map((item) => (
-              <ProductCard
-                key={item.id}
-                setCartItens={setCartItens}
-                item={item}
-                image={item.thumbnail}
-                name={item.title}
-                price={item.price}
-              />
-            ))
+          { (!search && !searchLoading) ? <WaitingToSearch/> : (
+            nameSearch && (
+              nameResults.map((item) => (
+                <ProductCard
+                  key={item.id}
+                  setCartItens={setCartItens}
+                  item={item}
+                  image={item.thumbnail}
+                  name={item.title}
+                  price={item.price}
+                />
+              ))
+            )
           ) }
         </section>
     </section>

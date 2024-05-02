@@ -30,7 +30,7 @@ export const getCategoriesList = async () => {
 }
 
 export const getCategory = async (categoryId: string) => {
-  const response = await fetch(`https://api.mercadolibre.com/categories/{${categoryId}}`)
+  const response = await fetch(`https://api.mercadolibre.com/sites/MLB/search?category=${categoryId}`)
   if (!response.ok) {
     throw new Error('Erro ao realizar a requisição')
   }
@@ -40,7 +40,7 @@ export const getCategory = async (categoryId: string) => {
 }
 
 export const getCategoryAtributes = async (categoryId: string) => {
-  const response = await fetch(`https://api.mercadolibre.com/categories/{${categoryId}}/attributes`)
+  const response = await fetch(`https://api.mercadolibre.com/categories/${categoryId}/attributes`)
   if (!response.ok) {
     throw new Error('Erro ao realizar a requisição')
   }

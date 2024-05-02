@@ -37,10 +37,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  text-decoration: none;
+  color: black;
 }
 
 .logo {
   font-size: 80px;
+  color: green;
 }
 
 .nameDiv {
