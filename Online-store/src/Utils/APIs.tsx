@@ -1,5 +1,5 @@
-export const getByName = async (item: string) => {
-  const response = await fetch(`https://api.mercadolibre.com/sites/MLB/search?q={${item}}`)
+export const getByName = async (item: string, offset: number) => {
+  const response = await fetch(`https://api.mercadolibre.com/sites/MLB/search?q={${item}}&offset=${offset}`)
   if(!response.ok) {
     throw new Error('Erro ao realizar a requisição')
   }

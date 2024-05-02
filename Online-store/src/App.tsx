@@ -20,7 +20,7 @@ function App() {
   const [cartItens, setCartItens] = useState([])
   const [nameSearch, setNameSearch] = useState(false)
   const [categorySearch, setCategorySearch] = useState(false)
-  // const [page, setPage] = useState(0)
+  const [offset, setOffset] = useState(0)
 
   useEffect(() => {
     setCartCount(cartItens.length)
@@ -56,7 +56,7 @@ function App() {
     setCategorySearch(false)
     setNameSearch(true)
     try {
-      const response = await getByName(searchInputValue.search)
+      const response = await getByName(searchInputValue.search, offset)
       setSearchByName(response)
     } catch (error) {
       console.error(error)
@@ -85,7 +85,7 @@ function App() {
     const handleScroll = () => {
       const {scrollHeight, clientHeight, scrollTop} = document.documentElement;
       if (scrollTop + clientHeight + 1 >= scrollHeight) {
-        console.log('chegou ao fim')
+        setOffset((prev) => prev + 50)
       }
     }
     window.addEventListener('scroll', handleScroll)
@@ -110,7 +110,7 @@ function App() {
               categories={categories}
               loading={loading}
               nameResults={searchByName.results}
-              categoryResults={resultsByCategory}
+              categoryResults={resultsByCategory.results}
               search={search}
               searchLoading={searchLoading}
               setCartItens={setCartItens}

@@ -14,7 +14,7 @@ function Home(
     categorySearch,
     nameSearch,
     nameResults,
-    resultsByCategory,
+    categoryResults,
     categories,
     loading,
     search,
@@ -25,6 +25,7 @@ function Home(
   console.log(nameResults)
 
   if(loading) return <Loading />
+
 
   return (
     <section className={styles.homeSection}>
@@ -50,20 +51,31 @@ function Home(
       </aside>
         <section className={styles.searchedProductsSection}>
           {searchLoading && <Loading />}
-          { (!search && !searchLoading) ? <WaitingToSearch/> : (
-            nameSearch && (
-              nameResults.map((item) => (
-                <ProductCard
-                  key={item.id}
-                  setCartItens={setCartItens}
-                  item={item}
-                  image={item.thumbnail}
-                  name={item.title}
-                  price={item.price}
-                />
-              ))
-            )
-          ) }
+          { (!search && !searchLoading) && <WaitingToSearch/> }
+          {nameSearch && (
+            nameResults.map((item) => (
+              <ProductCard
+                key={item.id}
+                setCartItens={setCartItens}
+                item={item}
+                image={item.thumbnail}
+                name={item.title}
+                price={item.price}
+              />
+            ))
+          )}
+          {categorySearch && (
+            categoryResults.map((item) => (
+              <ProductCard
+                key={item.id}
+                setCartItens={setCartItens}
+                item={item}
+                image={item.thumbnail}
+                name={item.title}
+                price={item.price}
+              />
+            ))
+          )} 
         </section>
     </section>
   )

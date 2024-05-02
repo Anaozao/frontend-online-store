@@ -37,13 +37,13 @@ export type HomeProps = {
     name: string;
   }[];
   loading: boolean;
-    nameResults: {
+  nameResults: {
     title: string;
     price: number;
     thumbnail: string;
     id: string;
   }[];
-  resultsByCategory: {
+  categoryResults: {
     title: string;
     price: number;
     thumbnail: string;
