@@ -1,8 +1,9 @@
 import { useNavigate } from 'react-router-dom'
 import styles from './FinishWindow.module.css'
 import React, { useState } from 'react'
+import { CartPageProps } from '../../Types/Types'
 
-function FinishWindow({LocalStorage}) {
+function FinishWindow({LocalStorage}: CartPageProps) {
 
   const navigate = useNavigate()
 
@@ -30,7 +31,7 @@ function FinishWindow({LocalStorage}) {
     ))
   }
 
-  const handleCheck = (e) => {
+  const handleCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPaymentMethod(e.target.value)
   }
 
@@ -44,8 +45,8 @@ function FinishWindow({LocalStorage}) {
   return (
     <section className={styles.finishSection}>
       <form className={styles.finishForm}>
-        <h2>Informações do Comprador</h2>
-        <div>
+        <h2 className={styles.formChildrens}>Informações do Comprador</h2>
+        <div className={styles.formChildrens}>
           <label htmlFor="full-name-input"></label>
           <input
             onChange={handleChange}
@@ -67,7 +68,7 @@ function FinishWindow({LocalStorage}) {
           />
         </div>
 
-        <div>
+        <div className={styles.formChildrens}>
           <label htmlFor="email-input"></label>
           <input
             onChange={handleChange}
@@ -89,7 +90,7 @@ function FinishWindow({LocalStorage}) {
           />
         </div>
 
-        <div>
+        <div className={styles.formChildrens}>
           <label htmlFor="cep-input"></label>
           <input
             onChange={handleChange}
@@ -111,7 +112,7 @@ function FinishWindow({LocalStorage}) {
           />
         </div>
 
-        <div>
+        <div className={styles.formChildrens}>
           <label htmlFor="complement-input"></label>
           <input
           onChange={handleChange}
@@ -133,7 +134,7 @@ function FinishWindow({LocalStorage}) {
           />
         </div>
 
-        <div>
+        <div className={styles.formChildrens}>
           <label htmlFor="city-input"></label>
           <input
             onChange={handleChange}
@@ -175,8 +176,8 @@ function FinishWindow({LocalStorage}) {
             <option value="TO">Tocantins</option>
           </select>
         </div>
-        <h2>Método de pagamento</h2>
-        <div>
+        <h2 className={styles.formChildrens}>Método de pagamento</h2>
+      <div className={`${styles.formChildrens} ${styles.paymentMethods}`}>
           <div>
             <p>Boleto</p>
             <label htmlFor="bank-slip"></label>
@@ -201,7 +202,7 @@ function FinishWindow({LocalStorage}) {
           </div>
         </div>
 
-      <button type='submit' onClick={handleFinish}>Comprar</button>
+      <button className={styles.formChildrens} type='submit' onClick={handleFinish}>Comprar</button>
       </form>
     </section>
   )

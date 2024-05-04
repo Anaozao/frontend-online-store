@@ -67,6 +67,10 @@ export type cartItensProps = {
 export type CartItensTypes = cartItensProps & {
   quantity?: number;
 };
+export type CartPageProps = {
+  LocalStorage: LocalStorageType
+
+}
 
 export type LocalStorageType = {
   cartItens: CartItensTypes[];

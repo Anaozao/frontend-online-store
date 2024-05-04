@@ -4,14 +4,8 @@ import CartProductsCard from '../../Components/CartProductCard/CartProductCard';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import EmptyCart from '../../Components/EmptyCart/EmptyCart';
-import { CartItensTypes, LocalStorageType } from '../../Types/Types';
+import { CartItensTypes, CartPageProps } from '../../Types/Types';
 import FinishWindow from '../../Components/FinishWindow/FinishWindow';
-
-type CartPageProps = {
-  LocalStorage: LocalStorageType
-
-}
-
 
 function CartPage({LocalStorage}: CartPageProps) {
 
