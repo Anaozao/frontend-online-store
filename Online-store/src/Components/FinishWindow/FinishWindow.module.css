@@ -1,0 +1,13 @@
+.finishSection {
+  display: flex;
+  justify-content: center;
+  flex-grow: 0.8;
+}
+
+.finishForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+  /* box-shadow: 1px 1px 5px black; */
+}

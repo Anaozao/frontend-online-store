@@ -74,5 +74,5 @@ export type LocalStorageType = {
   removeItem: (id: string) => void;
   removeAll: (id: string) => CartItensTypes[];
   getCartItens: () => CartItensTypes[];
-  clearCard: () => void
+  clearCart: () => void
 }

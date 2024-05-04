@@ -12,7 +12,7 @@ function useLocalStorage() {
   const addToCart = (item: CartItensTypes) => {
     setCartItens((prevItens) => {
      const itens =  [...prevItens, item]
-     localStorage.setItem('cartItem', JSON.stringify([...itens]))
+     localStorage.setItem('cartItens', JSON.stringify([...itens]))
      return itens;
     }
   
@@ -26,7 +26,7 @@ function useLocalStorage() {
 
       newCartItens.splice(index, 1)
       
-      localStorage.setItem('cartItem', JSON.stringify(newCartItens))
+      localStorage.setItem('cartItens', JSON.stringify(newCartItens))
 
       setCartItens(newCartItens)
     }
@@ -36,16 +36,16 @@ function useLocalStorage() {
     const itens = cartItens.filter((item) => item.id !== id)
 
     setCartItens(itens)
-    localStorage.setItem('cartItem', JSON.stringify(itens))
+    localStorage.setItem('cartItens', JSON.stringify(itens))
     return itens;
   }
 
-  const clearCard = () => {
+  const clearCart = () => {
     setCartItens([])
-    localStorage.setItem('cartItem', '[]')
+    localStorage.setItem('cartItens', '[]')
   }
 
-  return {cartItens, addToCart, removeItem, removeAll, getCartItens, clearCard};
+  return {cartItens, addToCart, removeItem, removeAll, getCartItens, clearCart};
 }
 
 export default useLocalStorage;
