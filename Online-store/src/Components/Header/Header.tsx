@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { HiShoppingBag } from "react-icons/hi";
 import { HeaderProps } from "../../Types/Types";
 
-function Header({cartCount, onChange, onSearch}: HeaderProps) {
+function Header({cartItens, onChange, onSearch}: HeaderProps) {
 
   return (
     <header className={styles.header}>
@@ -37,7 +37,7 @@ function Header({cartCount, onChange, onSearch}: HeaderProps) {
         </div>
       </Link>
       <div className={styles.cartDiv}>
-        <Link to='/cart' className={styles.cartNumber}>{cartCount}</Link>
+        <Link to='/cart' className={styles.cartNumber}>{cartItens.length}</Link>
         <Link className={styles.cartLink} to='/cart'><FaCartShopping className={styles.cartIcon}/></Link>
       </div>
     </header>

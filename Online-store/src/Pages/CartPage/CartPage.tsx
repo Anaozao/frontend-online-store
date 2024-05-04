@@ -4,37 +4,35 @@ import CartProductsCard from '../../Components/CartProductCard/CartProductCard';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import EmptyCart from '../../Components/EmptyCart/EmptyCart';
-import { cartItensProps } from '../../Types/Types';
+import { CartItensTypes, LocalStorageType } from '../../Types/Types';
 
 type CartPageProps = {
-  setCartItens: React.Dispatch<React.SetStateAction<never[]>>
-  cartItens: {
-    id: number;
-    price: number;
-    image: string;
-    title: string
-    quantity?: number;
-
-  }[];
+  LocalStorage: LocalStorageType
 
 }
 
-function CartPage({cartItens, setCartItens}: CartPageProps) {
+
+function CartPage({LocalStorage}: CartPageProps) {
 
   const [totalValue, setTotalValue] = useState(0)
 
   useEffect(() => {
-    console.log(cartItens);
-    const total = cartItens.map((iten) => iten.price).reduce((acc, price) => acc += price, 0)
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
+    const total = LocalStorage.cartItens.map((item) => item.price).reduce((acc, price) => acc += price, 0)
     setTotalValue(total)
     
-  }, [cartItens])
+  }, [LocalStorage.cartItens])
 
-  const uniqueItem = cartItens.reduce((unique, item) => {
-    const existingItem = unique.find((uniqueItem: cartItensProps) => uniqueItem.id === item.id);
+  const uniqueItem = LocalStorage.cartItens.reduce((unique: CartItensTypes[], item) => {
+    const existingItem = unique.find((uniqueItem) => uniqueItem.id === item.id);
 
     if(existingItem) {
-      existingItem.quantity += 1;
+      if (existingItem.quantity){
+        existingItem.quantity += 1;
+      }
     } else {
       unique.push({...item, quantity: 1})
     }
@@ -48,23 +46,22 @@ function CartPage({cartItens, setCartItens}: CartPageProps) {
         <div className={styles.cartProductsDiv}>
           <div className={styles.cartPageTopButtons}>
             <Link to='/' className={styles.goBack} ><TiArrowBack className={styles.goBackIcon}/> Voltar</Link>
-            <button className={styles.clearButton} type='button' onClick={() => setCartItens([])}>Limpar</button>
+            <button className={styles.clearButton} type='button' onClick={LocalStorage.clearCard}>Limpar</button>
           </div>
-          {uniqueItem.map((iten: cartItensProps) => (
+          {uniqueItem.map((iten: CartItensTypes) => (
             <CartProductsCard
               key={iten.id}
               name={iten.title}
               price={iten.price}
-              image={iten.thumbnail}
-              cartItens={cartItens}
-              iten={iten}
+              thumbnail={iten.thumbnail ? iten.thumbnail : ''}
+              LocalStorage={LocalStorage}
+              item={iten}
               quantity={iten.quantity}
-              setCartItens={setCartItens}
             />
           ))}
         </div>
       </div>
-      { cartItens.length < 1 ? <EmptyCart /> :
+      { LocalStorage.cartItens.length < 1 ? <EmptyCart /> :
         <div className={styles.cartFinishDiv}>
           <p>Valor total da compra:</p>
           <p>R${Number(totalValue).toFixed(2)}</p>

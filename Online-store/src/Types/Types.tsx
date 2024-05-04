@@ -2,29 +2,13 @@ export type CartProductsCardProps = {
   quantity: number | undefined;
   name: string;
   price: number;
-  image: string;
-  setCartItens: React.Dispatch<React.SetStateAction<never[]>>;
-  cartItens: {
-    id: number;
-    price: number;
-    image: string;
-    title: string;
-    quantity?: number | undefined;
-
-  }[]
-  iten: cartItensProps
-}
-
-export type cartItensProps = {
-  id: number;
-  price: number;
   thumbnail: string;
-  title: string
-  quantity?: number | undefined
+  item: cartItensProps
+  LocalStorage: LocalStorageType
 }
 
 export type HeaderProps = {
-  cartCount: number;
+  cartItens: CartItensTypes[]
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onSearch: (e: React.FormEvent<HTMLButtonElement>) => Promise<void>;
 }
@@ -51,17 +35,44 @@ export type HomeProps = {
   }[];
   search: boolean;
   searchLoading: boolean;
-  setCartItens: React.Dispatch<React.SetStateAction<never[]>>;
-  setResultsByCategori: React.Dispatch<React.SetStateAction<never[]>>;
-  setSearchByName: React.Dispatch<React.SetStateAction<never[]>>;
+  setResultsByCategori: React.Dispatch<React.SetStateAction<fetchTypes[]>>;
+  setSearchByName: React.Dispatch<React.SetStateAction<fetchTypes[]>>;
   handleCategory: (e: string) => void;
   setSort: React.Dispatch<React.SetStateAction<string>>;
   sort: string;
-  setProduct: React.Dispatch<React.SetStateAction<object>>;
+  LocalStorage: LocalStorageType
 }
 
 export type productDetails = {
   title: string;
   price: number;
   thumbnail: string;
+  id: string;
+}
+
+export type fetchTypes = {
+  title: string;
+  price: number;
+  thumbnail: string;
+  id: string;
+}
+
+export type cartItensProps = {
+  id: string;
+  price: number;
+  thumbnail: string
+  title: string;
+}
+
+export type CartItensTypes = cartItensProps & {
+  quantity?: number;
+};
+
+export type LocalStorageType = {
+  cartItens: CartItensTypes[];
+  addToCart: (item: CartItensTypes) => void;
+  removeItem: (id: string) => void;
+  removeAll: (id: string) => CartItensTypes[];
+  getCartItens: () => CartItensTypes[];
+  clearCard: () => void
 }

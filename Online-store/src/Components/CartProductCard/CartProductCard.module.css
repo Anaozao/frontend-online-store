@@ -39,3 +39,10 @@
   font-size: 20px;
   margin-left: 10px;
 }
+.itemLink {
+  text-decoration: none;
+  color: black;
+  display: flex;
+  align-items: center;
+  margin: 0 10px;
+}

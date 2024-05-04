@@ -1,6 +1,7 @@
-
-import { Link } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 import styles from './ProductCard.module.css'
+import { LocalStorageType } from '../../Types/Types';
+
 type ProductCardProps = {
   image: string;
   name: string;
@@ -11,27 +12,22 @@ type ProductCardProps = {
     thumbnail: string;
     id: string;
   };
-  setCartItens: React.Dispatch<React.SetStateAction<never[]>>
-  setProduct: React.Dispatch<React.SetStateAction<object>>
+  LocalStorage: LocalStorageType
 }
 
-function ProductCard({setProduct, image, name, price, item, setCartItens}:ProductCardProps) {
-
-  const handleAddToCart = () => {
-    setCartItens((prevItens) => [...prevItens, item])
-  }
+function ProductCard({LocalStorage, image, name, price, item}:ProductCardProps) {
 
   return (
     <div className={styles.productCard}>
-      <Link className={styles.productLink} to={`/product/${name}/details`} onClick={() => setProduct(item)}>
+      <Link className={styles.productLink} to={`/product/${item.id}/details`}>
         <img className={styles.productImage} src={image} alt={`Imagem de ${name}`} />
         <h4 className={styles.productName}>{name}</h4>
-        <p className={styles.productPrice}>R${price}</p>
+        <p className={styles.productPrice}>R${Number(price).toFixed(2)}</p>
       </Link>
       <button
         className={styles.productCardButton}
         type='button'
-        onClick={handleAddToCart}
+        onClick={() => LocalStorage.addToCart(item)}
         >
           Adicionar ao carrinho
         </button>

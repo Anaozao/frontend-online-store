@@ -1,5 +1,7 @@
-export const getByName = async (item: string, offset: number) => {
-  const response = await fetch(`https://api.mercadolibre.com/sites/MLB/search?q={${item}}&offset=${offset}`)
+import { productDetails } from "../Types/Types";
+
+export const getByName = async (item: string, offset: number = 0) => {
+  const response = await fetch(`https://api.mercadolibre.com/sites/MLB/search?q=${item}&offset=${offset}`)
   if(!response.ok) {
     throw new Error('Erro ao realizar a requisição')
   }
@@ -16,7 +18,7 @@ export const getByIdS = async (itemId: string) => {
   }
   const data = response.json();
 
-  return data
+  return data as unknown as productDetails
 }
 
 export const getCategoriesList = async () => {
@@ -29,7 +31,7 @@ export const getCategoriesList = async () => {
   return data
 }
 
-export const getCategory = async (categoryId: string, offset: number) => {
+export const getCategory = async (categoryId: string, offset: number = 0) => {
   const response = await fetch(`https://api.mercadolibre.com/sites/MLB/search?category=${categoryId}&offset=${offset}`)
   if (!response.ok) {
     throw new Error('Erro ao realizar a requisição')

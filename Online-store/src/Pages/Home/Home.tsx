@@ -12,7 +12,7 @@ type categoryType = {
 
 function Home(
   { 
-    setProduct,
+    LocalStorage,
     setSort,
     sort,
     categorySearch,
@@ -24,7 +24,6 @@ function Home(
     search,
     searchLoading,
     handleCategory,
-    setCartItens,
     setSearchByName,
     setResultsByCategori
   }: HomeProps) {
@@ -62,6 +61,10 @@ function Home(
   useEffect(() => {
 
   },[search])
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   
   if(loading) return <Loading />
 
@@ -109,12 +112,11 @@ function Home(
                 nameResults.map((item) => (
                   <ProductCard
                   key={item.id}
-                  setCartItens={setCartItens}
                   item={item}
                   image={item.thumbnail}
                   name={item.title}
                   price={item.price}
-                  setProduct={setProduct}
+                  LocalStorage={LocalStorage}
                 />
                 ))
               )}
@@ -122,12 +124,11 @@ function Home(
                 categoryResults.map((procuct) => (
                   <ProductCard
                   key={procuct.id}
-                  setCartItens={setCartItens}
                   item={procuct}
                   image={procuct.thumbnail}
                   name={procuct.title}
                   price={procuct.price}
-                  setProduct={setProduct}
+                  LocalStorage={LocalStorage}
                 />
                 ))
               )}

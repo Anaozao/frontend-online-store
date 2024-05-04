@@ -1,34 +1,31 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, useNavigate } from 'react-router-dom'
 import './App.css'
 import Layout from './Components/Layout/Layout'
 import React, { useEffect, useState } from 'react'
 import Home from './Pages/Home/Home'
 import { getByName, getCategoriesList, getCategory } from './Utils/APIs'
 import CartPage from './Pages/CartPage/CartPage'
-import { HomeProps, productDetails } from './Types/Types'
+import { HomeProps, fetchTypes } from './Types/Types'
 import ProductPage from './Pages/ProductPage/ProductPage'
+import useLocalStorage from './Hooks/useLocalStorage'
 
 function App() {
   const [searchInputValue, setSearchInputValue] = useState({search: ''})
-  const [searchByName, setSearchByName] = useState([])
-  const [resultsByCategory, setResultsByCategori] = useState([])
-  const [cartCount, setCartCount] = useState(0)
+  const [searchByName, setSearchByName] = useState<fetchTypes[]>([])
+  const [resultsByCategory, setResultsByCategori] = useState<fetchTypes[]>([])
   const [categories, setCategories] = useState<HomeProps['categories']>([])
   const [loading, setLoading] = useState(false)
   const [search, setSearch] = useState(false)
   const [searchLoading, setSearchLoading] = useState(false)
-  const [cartItens, setCartItens] = useState([])
   const [nameSearch, setNameSearch] = useState(false)
   const [categorySearch, setCategorySearch] = useState(false)
   const [category, setCategory] = useState('')
   const [offset, setOffset] = useState(0)
   const [sort, setSort] = useState('Menor')
-  const [product, setProduct] = useState<productDetails>({})
-
-  useEffect(() => {
-    setCartCount(cartItens.length)
-  }, [cartItens])
+  const navigate = useNavigate();
+  const LOCALSTORAGE = useLocalStorage()
 
   useEffect(() => {
     setLoading(true)
@@ -44,7 +41,7 @@ function App() {
     }
     fetchCategories()
   }, [])
-  
+
   const handleSeachChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchInputValue((prevState) => (
       {
@@ -67,6 +64,7 @@ function App() {
     } catch (error) {
       console.error(error)
     } finally {
+      navigate('')
       setSearchLoading(false)
       setSearch(true)
     }
@@ -90,47 +88,54 @@ function App() {
   }
 
   useEffect(() => {
-    const handleScroll = async () => {
-      const {scrollHeight, clientHeight, scrollTop} = document.documentElement;
-      if (scrollTop + clientHeight + 1 >= scrollHeight) {
-        setOffset((prev) => prev + 50)
-        if(nameSearch) {
-          setSearchLoading(true)
-          setCategorySearch(false)
+    const getData = async () => {
+      if(nameSearch) {
+        setSearchLoading(true)
+        setCategorySearch(false)
+        try {
+          const response = await getByName(searchInputValue.search, offset)
+          setSearchByName((prev) => [...prev, ...response.results])
           setNameSearch(true)
-          try {
-            const response = await getByName(searchInputValue.search, offset)
-            setSearchByName((prev) => [...prev, ...response.results])
-          } catch (error) {
-            console.error(error)
-          } finally {
-            setSearchLoading(false)
-            setSearch(true)
-          }
+        } catch (error) {
+          console.error(error)
+        } finally {
+          setSearchLoading(false)
+          setSearch(true)
         }
-        if (categorySearch) {
-          setSearchLoading(true)
+      }
+      if (categorySearch) {
+        setSearchLoading(true)
+        setNameSearch(false)
+        try {
+          const response = await getCategory(category, offset)
+          setResultsByCategori((prev) => [...prev, ...response.results])
           setCategorySearch(true)
-          setNameSearch(false)
-          try {
-            const response = await getCategory(category, offset)
-            setResultsByCategori((prev) => [...prev, ...response.results])
-          } catch (error) {
-            console.error(error)
-          } finally {
-            setSearchLoading(false)
-            setSearch(true)
-          }
+        } catch (error) {
+          console.error(error)
+        } finally {
+          setSearchLoading(false)
+          setSearch(true)
         }
       }
     }
-    window.addEventListener('scroll', handleScroll)
+    getData()
+  }, [offset])
 
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-    }
-  },[offset])
+  useEffect(() => {
+      const handleScroll = async () => {
+      
+        const {scrollHeight, clientHeight, scrollTop} = document.documentElement;
+        if (scrollTop + clientHeight + 1 >= scrollHeight) {
+          setOffset((prev) => prev + 50)
+        }
+      }  
+    
+      window.addEventListener('scroll', handleScroll)
 
+      return () => {
+        window.removeEventListener('scroll', handleScroll)
+      }
+    },[])
 
   return (
     <Routes >
@@ -138,8 +143,8 @@ function App() {
         path='/' 
         element={<Layout
           onChange={handleSeachChange}
-          cartCount={cartCount}
           onSearch={handleSearch}
+          cartItens={LOCALSTORAGE.cartItens}
           />}
         >
             <Route index element={<Home
@@ -149,7 +154,6 @@ function App() {
               categoryResults={resultsByCategory}
               search={search}
               searchLoading={searchLoading}
-              setCartItens={setCartItens}
               handleCategory={handleCategory}
               nameSearch={nameSearch}
               categorySearch={categorySearch}
@@ -157,22 +161,21 @@ function App() {
               setResultsByCategori={setResultsByCategori}
               setSort={setSort}
               sort={sort}
-              setProduct={setProduct}
+              LocalStorage={LOCALSTORAGE}
               />}
             />
             <Route
               path='/cart'
               element={
                 <CartPage
-                  cartItens={cartItens}
-                  setCartItens={setCartItens}
+                  LocalStorage={LOCALSTORAGE}
                 />
               }/>
             <Route
-              path={`product/${product.title}/details`}
+              path={`product/:id/details`}
               element={
                 <ProductPage
-                  product={product}
+                  LocalStorage={LOCALSTORAGE}
                 />}
             />  
       </Route>
