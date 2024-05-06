@@ -20,8 +20,31 @@
 
 .formChildrens {
   margin-left: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
 }
 .paymentMethods {
   display: flex;
   gap: 20px;
+}
+
+.finishBtn {
+  font-size: 18px;
+  align-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  height: 30px;
+  width: 200px;
+  border: none;
+  border-radius: 2px;
+  box-shadow: 1px 1px 5px rgb(43, 46, 43);
+  background-color: rgb(116, 235, 116);
+  font-weight: bold;
+ 
+  &:active {
+   box-shadow: 1px 1px 3px rgb(2, 7, 77);
+  }
 }

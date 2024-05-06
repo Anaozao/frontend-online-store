@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom'
 import styles from './FinishWindow.module.css'
 import React, { useState } from 'react'
 import { CartPageProps } from '../../Types/Types'
+import { FaBarcode, FaCcMastercard, FaCcVisa } from 'react-icons/fa6'
 
 function FinishWindow({LocalStorage}: CartPageProps) {
 
@@ -21,6 +22,35 @@ function FinishWindow({LocalStorage}: CartPageProps) {
     city: '',
     state: '',
   })
+
+  const validateForm = () => {
+   const 
+    {
+      adress,
+      adressNumber,
+      cep,
+      city,
+      cpf,
+      email,
+      fullName,
+      phone,
+      state
+    } = formInputs
+
+    const regexEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+    return (
+      !regexEmail.test(email)
+      || !(adress.length > 2)
+      || !(city.length > 2)
+      || !(adressNumber.length > 0)
+      || !(cep.length === 8)
+      // || !(cpf.length === 11)
+      || state === ''
+      || !(fullName.length > 3)
+      // || !regexPhone.test(phone)
+    )
+  }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setFormInputs((prevState) => (
@@ -49,6 +79,7 @@ function FinishWindow({LocalStorage}: CartPageProps) {
         <div className={styles.formChildrens}>
           <label htmlFor="full-name-input"></label>
           <input
+            className={styles.infoInputs}
             onChange={handleChange}
             type="text"
             placeholder='Nome Completo'
@@ -59,6 +90,7 @@ function FinishWindow({LocalStorage}: CartPageProps) {
 
           <label htmlFor="cpf-input"></label>
           <input
+            className={styles.infoInputs}
             onChange={handleChange}
             type="text"
             id='cpf-input'
@@ -71,6 +103,7 @@ function FinishWindow({LocalStorage}: CartPageProps) {
         <div className={styles.formChildrens}>
           <label htmlFor="email-input"></label>
           <input
+            className={styles.infoInputs}
             onChange={handleChange}
             type="text"
             id='email-input'
@@ -81,6 +114,7 @@ function FinishWindow({LocalStorage}: CartPageProps) {
 
           <label htmlFor="phone-input"></label>
           <input
+            className={styles.infoInputs}
             onChange={handleChange}
             type="text"
             id='phone-input'
@@ -93,6 +127,7 @@ function FinishWindow({LocalStorage}: CartPageProps) {
         <div className={styles.formChildrens}>
           <label htmlFor="cep-input"></label>
           <input
+            className={styles.infoInputs}
             onChange={handleChange}
             type="text"
             id='cep-input'
@@ -103,6 +138,7 @@ function FinishWindow({LocalStorage}: CartPageProps) {
 
           <label htmlFor="adress-input"></label>
           <input
+            className={styles.infoInputs}
             onChange={handleChange}
             type="text"
             id='adress-input'
@@ -115,7 +151,8 @@ function FinishWindow({LocalStorage}: CartPageProps) {
         <div className={styles.formChildrens}>
           <label htmlFor="complement-input"></label>
           <input
-          onChange={handleChange}
+            className={styles.infoInputs}
+            onChange={handleChange}
             type="text"
             name="complement"
             id="complement-input"
@@ -125,6 +162,7 @@ function FinishWindow({LocalStorage}: CartPageProps) {
 
           <label htmlFor="adress-number-input"></label>
           <input
+            className={styles.infoInputs}
             onChange={handleChange}
             type="text"
             id='adress-number-input'
@@ -137,6 +175,7 @@ function FinishWindow({LocalStorage}: CartPageProps) {
         <div className={styles.formChildrens}>
           <label htmlFor="city-input"></label>
           <input
+            className={styles.infoInputs}
             onChange={handleChange}
             type="text"
             id='city-input'
@@ -145,7 +184,7 @@ function FinishWindow({LocalStorage}: CartPageProps) {
             value={formInputs.city}
           />
 
-          <select onChange={handleChange} name="state">
+          <select className={styles.infoInputs} onChange={handleChange} name="state">
             <option value="" disabled selected>Escolha um estado</option>
             <option value="AC">Acre</option>
             <option value="AL">Alagoas</option>
@@ -180,29 +219,34 @@ function FinishWindow({LocalStorage}: CartPageProps) {
       <div className={`${styles.formChildrens} ${styles.paymentMethods}`}>
           <div>
             <p>Boleto</p>
-            <label htmlFor="bank-slip"></label>
             <input type="radio" value='Boleto' onChange={handleCheck} name='payment' id='bank-slip' checked={paymentMethod === 'Boleto'}/>
+            <label htmlFor="bank-slip"><FaBarcode /></label>
           </div>
           <div>
             <p>Cartão de crédito</p>
-            <label htmlFor="visa"></label>
             <input type="radio" value='Cartão Visa' checked={
               paymentMethod === 'Cartão Visa'
             } onChange={handleCheck} name='payment' id='visa'/>
+            <label htmlFor="visa"><FaCcVisa /></label>
 
-            <label htmlFor="master"></label>
             <input type="radio" value='Cartão MasterCard' checked={
               paymentMethod === 'Cartão MasterCard'
             } onChange={handleCheck} name='payment' id='master' />
+            <label htmlFor="master"><FaCcMastercard /></label>
 
-            <label htmlFor="elo"></label>
             <input type="radio" value='Cartão Elo' onChange={handleCheck} checked={paymentMethod === 'Cartão Elo'} name='payment' id='elo'/>
-
-
+            <label htmlFor="elo"></label>
           </div>
         </div>
 
-      <button className={styles.formChildrens} type='submit' onClick={handleFinish}>Comprar</button>
+      <button
+        className={`${styles.formChildrens} ${styles.finishBtn}`}
+        type='submit'
+        onClick={handleFinish}
+        disabled={validateForm()}
+        >
+          Comprar
+      </button>
       </form>
     </section>
   )

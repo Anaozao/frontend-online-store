@@ -3,14 +3,12 @@
   display: flex;
   flex-direction: row;
   padding-top: 100px;
+  height: 90vh;
 }
 
 .categoriesAside {
-  /* position: fixed;
-  top:100px; */
   margin: 5px 0 0 10px;
   min-width: 300px;
-  
 }
 
 .categoryTitle {
@@ -27,7 +25,6 @@
 }
 
 .searchedProductsSection {
-  /* margin-left: 300px; */
   flex-grow: 1;
   display: flex;
   flex-flow: column;

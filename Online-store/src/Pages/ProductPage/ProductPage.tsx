@@ -14,6 +14,8 @@ function ProductPage({LocalStorage}: ProductPageProps) {
 
   const [quantity, setQuantity] = useState(0)
   const [product, setProduct] = useState<productDetails>()
+  const stock = product?.initial_quantity;
+  console.log(product)
 
   const {id} = useParams()
 
@@ -30,7 +32,9 @@ function ProductPage({LocalStorage}: ProductPageProps) {
 
 
   const handleAdd= () => {
-    setQuantity(quantity + 1)
+    if (stock && stock > quantity) {
+      setQuantity(quantity + 1)
+    }
   }
 
   const handleRemove = () => {
@@ -66,6 +70,7 @@ function ProductPage({LocalStorage}: ProductPageProps) {
              <li>Quisque id velit eleifend</li>
           </div>
           <hr />
+          <p className={styles.stock}>Em estoque: {stock}</p>
           <div className={styles.productAddDiv}>
             <p>R$ {Number(product?.price).toFixed(2)}</p>
             <div className={styles.addRemoveDiv}>

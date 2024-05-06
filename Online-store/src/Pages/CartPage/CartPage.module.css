@@ -30,7 +30,6 @@
 .cartPageTopButtons {
   width: 300px;
   text-align: center;
-  /* box-shadow: 1px 1px 3px rgb(126, 126, 126); */
   border-radius: 3px;
   display: flex;
   justify-content: space-around;

@@ -48,6 +48,7 @@ export type productDetails = {
   price: number;
   thumbnail: string;
   id: string;
+  initial_quantity: number
 }
 
 export type fetchTypes = {

@@ -94,7 +94,8 @@ function Home(
         <section className={styles.searchedProductsSection}>
           { (!search && !searchLoading) && <WaitingToSearch/> }
           <div className={styles.productsSection}>
-            <div className={styles.selectDiv}>
+            {search && (
+              <div className={styles.selectDiv}>
               <select
                 onChange={sortByPrice}
                 name="price-sort"
@@ -107,6 +108,7 @@ function Home(
                 <option value="Menor" className={styles.selectOptions}>Menor</option>
               </select>
             </div>
+            )}
             <div className={styles.products}>
               {nameSearch && (
                 nameResults.map((item) => (
