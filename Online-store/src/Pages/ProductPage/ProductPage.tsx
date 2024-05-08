@@ -44,7 +44,7 @@ function ProductPage({LocalStorage}: ProductPageProps) {
   }
 
   const handleAddToCart = () => {
-    for (let index =0; index < quantity; index += 1) {
+    for (let index = 0; index < quantity; index += 1) {
       if (product) {
         LocalStorage.addToCart(product)
       }

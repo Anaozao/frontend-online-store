@@ -1,9 +1,11 @@
 .productCard {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   align-content: center;
   margin: 15px 0;
   border-bottom: 1px solid black;
+  width: 90%;
 }
 
 .removeItem {

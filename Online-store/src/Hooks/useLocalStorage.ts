@@ -11,23 +11,39 @@ function useLocalStorage() {
   
   const addToCart = (item: CartItensTypes) => {
     setCartItens((prevItens) => {
-     const itens =  [...prevItens, item]
-     localStorage.setItem('cartItens', JSON.stringify([...itens]))
-     return itens;
+      const index = prevItens.findIndex((product) => product.id === item.id)
+      
+      if (index !== -1) {
+        const itens =  [...prevItens]
+        const quantity = itens[index].quantity
+        itens[index].quantity = quantity ? quantity + 1 : 2
+        localStorage.setItem('cartItens', JSON.stringify([...itens]))
+        return itens;
+
+      } else {
+        const itens =  [...prevItens, item]
+        localStorage.setItem('cartItens', JSON.stringify([...itens]))
+        return itens;
+
+      }
+      
     }
   
   )}
 
   const removeItem = (id: string) => {
     const index = cartItens.findIndex((item) => item.id === id)
-
+    const newCartItens = [...cartItens];
+    
     if (index !== -1) {
-      const newCartItens = [...cartItens];
-
-      newCartItens.splice(index, 1)
+      const quantity = newCartItens[index].quantity
+      if (quantity && quantity > 1) {
+        newCartItens[index].quantity =  quantity - 1
+      } else {
+        newCartItens.splice(index, 1)
+      }
       
       localStorage.setItem('cartItens', JSON.stringify(newCartItens))
-
       setCartItens(newCartItens)
     }
   }

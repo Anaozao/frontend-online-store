@@ -13,17 +13,13 @@ import useLocalStorage from './Hooks/useLocalStorage'
 
 function App() {
   const [searchInputValue, setSearchInputValue] = useState({search: ''})
-  const [searchByName, setSearchByName] = useState<fetchTypes[]>([])
-  const [resultsByCategory, setResultsByCategori] = useState<fetchTypes[]>([])
+  const [productList, setProductList] = useState<fetchTypes[]>([])
   const [categories, setCategories] = useState<HomeProps['categories']>([])
   const [loading, setLoading] = useState(false)
-  const [search, setSearch] = useState(false)
   const [searchLoading, setSearchLoading] = useState(false)
-  const [nameSearch, setNameSearch] = useState(false)
-  const [categorySearch, setCategorySearch] = useState(false)
   const [category, setCategory] = useState('')
   const [offset, setOffset] = useState(0)
-  const [sort, setSort] = useState('Menor')
+  const [sort, setSort] = useState('')
   const navigate = useNavigate();
   const LOCALSTORAGE = useLocalStorage()
 
@@ -53,70 +49,58 @@ function App() {
 
   const handleSearch = async (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault()
+    setProductList([])
     setSearchLoading(true)
-    setCategorySearch(false)
-    setNameSearch(true)
     setOffset(0)
     try {
       const response = await getByName(searchInputValue.search, offset)
       console.log(response.results)
-      setSearchByName(response.results)
+      setProductList(response.results)
     } catch (error) {
       console.error(error)
     } finally {
       navigate('')
       setSearchLoading(false)
-      setSearch(true)
+      setSort('')
     }
   }
 
   const handleCategory = async (e: string) => {
+    setProductList([])
     setSearchLoading(true)
-    setCategorySearch(true)
-    setNameSearch(false)
     setOffset(0)
     try {
       const response = await getCategory(e, offset)
-      setResultsByCategori(response.results)
+      setProductList(response.results)
     } catch (error) {
       console.error(error)
     } finally {
       setCategory(e)
       setSearchLoading(false)
-      setSearch(true)
+      setSort('')
     }
   }
 
   useEffect(() => {
     const getData = async () => {
-      if(nameSearch) {
         setSearchLoading(true)
-        setCategorySearch(false)
         try {
           const response = await getByName(searchInputValue.search, offset)
-          setSearchByName((prev) => [...prev, ...response.results])
-          setNameSearch(true)
+          setProductList((prev) => [...prev, ...response.results])
         } catch (error) {
           console.error(error)
         } finally {
           setSearchLoading(false)
-          setSearch(true)
         }
-      }
-      if (categorySearch) {
         setSearchLoading(true)
-        setNameSearch(false)
         try {
           const response = await getCategory(category, offset)
-          setResultsByCategori((prev) => [...prev, ...response.results])
-          setCategorySearch(true)
+          setProductList((prev) => [...prev, ...response.results])
         } catch (error) {
           console.error(error)
         } finally {
           setSearchLoading(false)
-          setSearch(true)
         }
-      }
     }
     getData()
   }, [offset])
@@ -150,15 +134,10 @@ function App() {
             <Route index element={<Home
               categories={categories}
               loading={loading}
-              nameResults={searchByName}
-              categoryResults={resultsByCategory}
-              search={search}
+              products={productList}
+              setProductList={setProductList}
               searchLoading={searchLoading}
               handleCategory={handleCategory}
-              nameSearch={nameSearch}
-              categorySearch={categorySearch}
-              setSearchByName={setSearchByName}
-              setResultsByCategori={setResultsByCategori}
               setSort={setSort}
               sort={sort}
               LocalStorage={LOCALSTORAGE}

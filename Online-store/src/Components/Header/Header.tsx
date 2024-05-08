@@ -7,6 +7,10 @@ import { HeaderProps } from "../../Types/Types";
 
 function Header({cartItens, onChange, onSearch}: HeaderProps) {
 
+  const quantity = cartItens.reduce((acc, item) => {
+    return acc += item.quantity || 1
+  }, 0)
+
   return (
     <header className={styles.header}>
       <div className={styles.searchDiv}>
@@ -37,7 +41,7 @@ function Header({cartItens, onChange, onSearch}: HeaderProps) {
         </div>
       </Link>
       <div className={styles.cartDiv}>
-        <Link to='/cart' className={styles.cartNumber}>{cartItens.length}</Link>
+        <Link to='/cart' className={styles.cartNumber}>{quantity}</Link>
         <Link className={styles.cartLink} to='/cart'><FaCartShopping className={styles.cartIcon}/></Link>
       </div>
     </header>

@@ -4,8 +4,9 @@ import { IoAddOutline, IoRemoveOutline } from 'react-icons/io5';
 import { CartProductsCardProps } from '../../Types/Types';
 import { Link } from 'react-router-dom';
 
-function CartProductsCard({LocalStorage, quantity, name, price, thumbnail, item}: CartProductsCardProps) {
-
+function CartProductsCard({LocalStorage, name, price, thumbnail, quantity, item}: CartProductsCardProps) {
+  
+  const quant = quantity ? quantity : 1
 
   return (
     <div className={styles.productCard}>
@@ -15,7 +16,7 @@ function CartProductsCard({LocalStorage, quantity, name, price, thumbnail, item}
         <p className={styles.productName}>{name}</p>
       </Link>
       <span  role='button' onClick={() => LocalStorage.removeItem(item.id)} className={styles.remove}><IoRemoveOutline /></span>
-      <div className={styles.count}>{quantity}</div>
+      <div className={styles.count}>{quant}</div>
       <span role='button' onClick={() => LocalStorage.addToCart(item)} className={styles.add}><IoAddOutline /></span>
       <p className={styles.price}>R$ {price}</p>
     </div>

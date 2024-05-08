@@ -14,29 +14,14 @@ export type HeaderProps = {
 }
 
 export type HomeProps = {
-  categorySearch: boolean;
-  nameSearch: boolean;
   categories: {
     id: string;
     name: string;
   }[];
   loading: boolean;
-  nameResults: {
-    title: string;
-    price: number;
-    thumbnail: string;
-    id: string;
-  }[];
-  categoryResults: {
-    title: string;
-    price: number;
-    thumbnail: string;
-    id: string;
-  }[];
-  search: boolean;
+  products: fetchTypes[]
   searchLoading: boolean;
-  setResultsByCategori: React.Dispatch<React.SetStateAction<fetchTypes[]>>;
-  setSearchByName: React.Dispatch<React.SetStateAction<fetchTypes[]>>;
+  setProductList: React.Dispatch<React.SetStateAction<fetchTypes[]>>;
   handleCategory: (e: string) => void;
   setSort: React.Dispatch<React.SetStateAction<string>>;
   sort: string;

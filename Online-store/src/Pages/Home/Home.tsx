@@ -11,62 +11,40 @@ type categoryType = {
 }
 
 function Home(
-  { 
+  {
     LocalStorage,
     setSort,
     sort,
-    categorySearch,
-    nameSearch,
-    nameResults,
-    categoryResults,
+    products,
+    setProductList,
     categories,
     loading,
-    search,
     searchLoading,
     handleCategory,
-    setSearchByName,
-    setResultsByCategori
   }: HomeProps) {
 
   const sortByPrice = (e: React.ChangeEvent<HTMLSelectElement>) => {
-      setSort(e.target.value)
-      handleSort(e.target.value)
+    setSort(e.target.value)
+    handleSort(e.target.value)
   }
 
   const handleSort = (option: string) => {
-      if (nameSearch) {
-        const newItens = [...nameResults];
-        newItens.sort((a, b) => {
-          if (option === 'Menor') {
-            return a.price - b.price;
-          } else {
-            return b.price - a.price
-          }
-        });
-        setSearchByName(newItens)
+    const newItens = [...products];
+    newItens.sort((a, b) => {
+      if (option === 'Menor') {
+        return a.price - b.price;
+      } else {
+        return b.price - a.price
       }
-      if (categorySearch) {
-        const newItens = [...categoryResults];
-        newItens.sort((a, b) => {
-          if (sort === 'Maior') {
-            return a.price - b.price;
-          } else {
-            return b.price - a.price
-          }
-        });
-        setResultsByCategori(newItens)
-      }
+    });
+    setProductList(newItens)
   }
-
-  useEffect(() => {
-
-  },[search])
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  
-  if(loading) return <Loading />
+
+  if (loading) return <Loading />
 
 
   return (
@@ -78,7 +56,7 @@ function Home(
           </h1>
         </div>
         <div className={styles.categories}>
-          { categories.map((category: categoryType) => (
+          {categories.map((category: categoryType) => (
             <p
               role='button'
               onClick={() => handleCategory(category.id)}
@@ -91,28 +69,28 @@ function Home(
           ))}
         </div>
       </aside>
-        <section className={styles.searchedProductsSection}>
-          { (!search && !searchLoading) && <WaitingToSearch/> }
-          <div className={styles.productsSection}>
-            {search && (
-              <div className={styles.selectDiv}>
+      <section className={styles.searchedProductsSection}>
+        {(products.length === 0 && !searchLoading) && <WaitingToSearch />}
+        <div className={styles.productsSection}>
+          {products.length !== 0 && (
+            <div className={styles.selectDiv}>
               <select
                 onChange={sortByPrice}
                 name="price-sort"
-                defaultValue=''
+                value={sort}
                 id=""
                 className={styles.selectContainer}
               >
-                <option value='' disabled className={styles.selectOptions}>Ordenar por preço</option>
+                <option value='' className={styles.selectOptions}>Ordenar por preço</option>
                 <option value="Maior" className={styles.selectOptions}>Maior</option>
                 <option value="Menor" className={styles.selectOptions}>Menor</option>
               </select>
             </div>
-            )}
+          )}
+          {searchLoading && <Loading />}     
             <div className={styles.products}>
-              {nameSearch && (
-                nameResults.map((item) => (
-                  <ProductCard
+              {products.map((item) => (
+                <ProductCard
                   key={item.id}
                   item={item}
                   image={item.thumbnail}
@@ -120,24 +98,11 @@ function Home(
                   price={item.price}
                   LocalStorage={LocalStorage}
                 />
-                ))
-              )}
-              {categorySearch && (
-                categoryResults.map((procuct) => (
-                  <ProductCard
-                  key={procuct.id}
-                  item={procuct}
-                  image={procuct.thumbnail}
-                  name={procuct.title}
-                  price={procuct.price}
-                  LocalStorage={LocalStorage}
-                />
-                ))
-              )}
-              {searchLoading && <Loading />}
-              </div>
+              ))}
+              {(searchLoading && products.length !== 0) && <Loading />}
             </div>
-        </section>
+        </div>
+      </section>
     </section>
   )
 }

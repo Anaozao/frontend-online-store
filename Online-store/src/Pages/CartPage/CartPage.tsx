@@ -1,7 +1,7 @@
 import { TiArrowBack } from 'react-icons/ti';
 import styles from './CartPage.module.css'
 import CartProductsCard from '../../Components/CartProductCard/CartProductCard';
-import { Link } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import EmptyCart from '../../Components/EmptyCart/EmptyCart';
 import { CartItensTypes, CartPageProps } from '../../Types/Types';
@@ -12,30 +12,22 @@ function CartPage({LocalStorage}: CartPageProps) {
   const [totalValue, setTotalValue] = useState(0)
   const [finish, setFinish] = useState(false)
 
+  
+
+
+  
+
+
   useEffect(() => {
     window.scrollTo(0, 0);
     setFinish(false)
   }, []);
 
   useEffect(() => {
-    const total = LocalStorage.cartItens.map((item) => item.price).reduce((acc, price) => acc += price, 0)
+    const total = LocalStorage.cartItens.map((item) => item.price * (item.quantity || 1)).reduce((acc, price) => acc += price, 0)
     setTotalValue(total)
     
   }, [LocalStorage.cartItens])
-
-  const uniqueItem = LocalStorage.cartItens.reduce((unique: CartItensTypes[], item) => {
-    const existingItem = unique.find((uniqueItem) => uniqueItem.id === item.id);
-
-    if(existingItem) {
-      if (existingItem.quantity){
-        existingItem.quantity += 1;
-      }
-    } else {
-      unique.push({...item, quantity: 1})
-    }
-
-    return unique
-  },[])
 
   return (
     <section className={styles.cartSection}>
@@ -45,7 +37,7 @@ function CartPage({LocalStorage}: CartPageProps) {
             <Link to='/' className={styles.goBack} ><TiArrowBack className={styles.goBackIcon}/> Voltar</Link>
             <button className={styles.clearButton} type='button' onClick={LocalStorage.clearCart}>Limpar</button>
           </div>
-          {uniqueItem.map((iten: CartItensTypes) => (
+          {LocalStorage.cartItens.map((iten: CartItensTypes) => (
             <CartProductsCard
               key={iten.id}
               name={iten.title}

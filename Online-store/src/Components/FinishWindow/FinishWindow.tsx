@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom'
 import styles from './FinishWindow.module.css'
 import React, { useState } from 'react'
 import { CartPageProps } from '../../Types/Types'
-import { FaBarcode, FaCcMastercard, FaCcVisa } from 'react-icons/fa6'
+import { FaBarcode, FaCcDinersClub, FaCcMastercard, FaCcVisa } from 'react-icons/fa6'
 
 function FinishWindow({LocalStorage}: CartPageProps) {
 
@@ -45,10 +45,10 @@ function FinishWindow({LocalStorage}: CartPageProps) {
       || !(city.length > 2)
       || !(adressNumber.length > 0)
       || !(cep.length === 8)
-      // || !(cpf.length === 11)
+      || !(cpf.length === 11)
       || state === ''
       || !(fullName.length > 3)
-      // || !regexPhone.test(phone)
+      || !(phone.length < 12 && phone.length > 9)
     )
   }
 
@@ -95,7 +95,8 @@ function FinishWindow({LocalStorage}: CartPageProps) {
             type="text"
             id='cpf-input'
             name='cpf'
-            placeholder='cpf'
+            maxLength={11}
+            placeholder='cpf (somente os números)'
             value={formInputs.cpf}
           />
         </div>
@@ -119,7 +120,8 @@ function FinishWindow({LocalStorage}: CartPageProps) {
             type="text"
             id='phone-input'
             name='phone'
-            placeholder='Telefone'
+            maxLength={11}
+            placeholder='Telefone (somente os númeos)'
             value={formInputs.phone}
           />
         </div>
@@ -184,7 +186,7 @@ function FinishWindow({LocalStorage}: CartPageProps) {
             value={formInputs.city}
           />
 
-          <select className={styles.infoInputs} onChange={handleChange} name="state">
+          <select className={`${styles.infoInputs} ${styles.select}`} onChange={handleChange} name="state">
             <option value="" disabled selected>Escolha um estado</option>
             <option value="AC">Acre</option>
             <option value="AL">Alagoas</option>
@@ -217,25 +219,35 @@ function FinishWindow({LocalStorage}: CartPageProps) {
         </div>
         <h2 className={styles.formChildrens}>Método de pagamento</h2>
       <div className={`${styles.formChildrens} ${styles.paymentMethods}`}>
-          <div>
+          <div className={styles.slip}>
             <p>Boleto</p>
-            <input type="radio" value='Boleto' onChange={handleCheck} name='payment' id='bank-slip' checked={paymentMethod === 'Boleto'}/>
-            <label htmlFor="bank-slip"><FaBarcode /></label>
+            <div className={styles.slipInput}>
+              <input type="radio" value='Boleto' onChange={handleCheck} name='payment' id='bank-slip' checked={paymentMethod === 'Boleto'}/>
+              <label htmlFor="bank-slip"><FaBarcode className={styles.icons}/></label>
+            </div>
           </div>
-          <div>
+          <div className={styles.paymentCards}>
             <p>Cartão de crédito</p>
-            <input type="radio" value='Cartão Visa' checked={
-              paymentMethod === 'Cartão Visa'
-            } onChange={handleCheck} name='payment' id='visa'/>
-            <label htmlFor="visa"><FaCcVisa /></label>
+            <div className={styles.credtCardDiv}>
+              <div className={styles.cards}>
+                <input type="radio" value='Cartão Visa' checked={
+                  paymentMethod === 'Cartão Visa'
+                } onChange={handleCheck} name='payment' id='visa'/>
+                <label htmlFor="visa"><FaCcVisa className={styles.icons}/></label>
+              </div>
+              
+              <div className={styles.cards}>
+                <input type="radio" value='Cartão MasterCard' checked={
+                  paymentMethod === 'Cartão MasterCard'
+                } onChange={handleCheck} name='payment' id='master' />
+                <label htmlFor="master"><FaCcMastercard className={styles.icons}/></label>
+              </div>
 
-            <input type="radio" value='Cartão MasterCard' checked={
-              paymentMethod === 'Cartão MasterCard'
-            } onChange={handleCheck} name='payment' id='master' />
-            <label htmlFor="master"><FaCcMastercard /></label>
-
-            <input type="radio" value='Cartão Elo' onChange={handleCheck} checked={paymentMethod === 'Cartão Elo'} name='payment' id='elo'/>
-            <label htmlFor="elo"></label>
+              <div className={styles.cards}>
+                <input type="radio" value='Cartão Dinners' onChange={handleCheck} checked={paymentMethod === 'Cartão Dinners'} name='payment' id='dinners'/>
+                <label htmlFor="dinners"><FaCcDinersClub className={styles.icons}/></label>
+              </div>  
+            </div>
           </div>
         </div>
 

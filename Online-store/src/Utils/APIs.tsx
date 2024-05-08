@@ -5,7 +5,7 @@ export const getByName = async (item: string, offset: number = 0) => {
   if(!response.ok) {
     throw new Error('Erro ao realizar a requisição')
   }
-  const data = response.json();
+  const data = await response.json();
 
   return data
 
@@ -16,7 +16,7 @@ export const getByIdS = async (itemId: string) => {
   if (!response.ok) {
     throw new Error('Erro ao realizar a requisição')
   }
-  const data = response.json();
+  const data = await response.json();
 
   return data as unknown as productDetails
 }
@@ -26,7 +26,7 @@ export const getCategoriesList = async () => {
   if (!response.ok) {
     throw new Error('Erro ao realizar a requisição')
   }
-  const data = response.json();
+  const data = await response.json();
 
   return data
 }
@@ -36,17 +36,7 @@ export const getCategory = async (categoryId: string, offset: number = 0) => {
   if (!response.ok) {
     throw new Error('Erro ao realizar a requisição')
   }
-  const data = response.json();
-
-  return data
-}
-
-export const getCategoryAtributes = async (categoryId: string) => {
-  const response = await fetch(`https://api.mercadolibre.com/categories/${categoryId}/attributes`)
-  if (!response.ok) {
-    throw new Error('Erro ao realizar a requisição')
-  }
-  const data = response.json();
+  const data = await response.json();
 
   return data
 }
