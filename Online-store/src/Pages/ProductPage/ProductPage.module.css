@@ -10,7 +10,7 @@
   margin-top: 50px;
   margin-left: 40px;
   gap: 3rem ;
-  height: 100vw;
+  height: 64vh;
 }
 
 .nameAndImage {
@@ -39,7 +39,7 @@
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  max-height: 100vh;
+  height: 100%;
 }
 
 .productInfoDiv {
@@ -94,4 +94,77 @@
 .stock {
   margin-left: 30px;
   margin-top: 10px;
+}
+
+.rateSection {
+  margin-top: 30px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.rateForm {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.rateTextarea {
+  resize: none;
+}
+
+.rateEmail {
+  width: 200px;
+  height: 30px;
+  margin-left: 5px;
+  text-align: center;
+}
+
+.rateBtnDiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.rateBtn {
+  cursor: pointer;
+  height: 30px;
+  width: 200px;
+  border: none;
+  border-radius: 2px;
+  box-shadow: 1px 1px 5px rgb(43, 46, 43);
+  background-color: rgb(116, 235, 116);
+  font-weight: bold;
+ 
+  &:active {
+   box-shadow: 1px 1px 3px rgb(2, 7, 77);
+  }
+}
+
+.rateName {
+  margin-top: 5px;
+  margin-left: 9.5px;
+  height: 30px;
+  width: 200px;
+}
+
+.rates {
+  border-radius: 10px;
+  margin-top: 30px;
+  min-height: 400px;
+  width: 80%;
+  background-color: white;
+}
+
+.rate {
+  border-bottom: solid rgba(0, 0, 0, 0.144) 1px;
+  margin-top: 20px;
+  margin-left: 20px;
+  padding-bottom: 10px;
+  width: 50%;
 }

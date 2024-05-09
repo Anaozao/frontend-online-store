@@ -10,6 +10,7 @@ import CartPage from './Pages/CartPage/CartPage'
 import { HomeProps, fetchTypes } from './Types/Types'
 import ProductPage from './Pages/ProductPage/ProductPage'
 import useLocalStorage from './Hooks/useLocalStorage'
+import useRatesLocalStorage from './Hooks/useRatesLocalStorage'
 
 function App() {
   const [searchInputValue, setSearchInputValue] = useState({search: ''})
@@ -22,6 +23,7 @@ function App() {
   const [sort, setSort] = useState('')
   const navigate = useNavigate();
   const LOCALSTORAGE = useLocalStorage()
+  const RatesLocalStorage = useRatesLocalStorage()
 
   useEffect(() => {
     setLoading(true)
@@ -154,6 +156,7 @@ function App() {
               path={`product/:id/details`}
               element={
                 <ProductPage
+                  RatesLocalStorage={RatesLocalStorage}
                   LocalStorage={LOCALSTORAGE}
                 />}
             />  

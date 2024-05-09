@@ -64,5 +64,26 @@ export type LocalStorageType = {
   removeItem: (id: string) => void;
   removeAll: (id: string) => CartItensTypes[];
   getCartItens: () => CartItensTypes[];
-  clearCart: () => void
+  clearCart: () => void;
+}
+
+export type RateTypes = {
+  rateName: string;
+  rateEmail: string
+  rateTextarea: string;
+  productId: string | undefined
+}
+
+export type GetRatesType = {
+  getLocalStorageRates: () => RateTypes[]
+}
+
+export type ProductPageProps = {
+  LocalStorage: LocalStorageType;
+  RatesLocalStorage: {
+    setRateInfos: React.Dispatch<React.SetStateAction<RateTypes>>;
+    rates: RateTypes[];
+    rateInfos: RateTypes;
+    handleRate: (e: React.FormEvent<HTMLButtonElement>) => void;
+  }
 }
