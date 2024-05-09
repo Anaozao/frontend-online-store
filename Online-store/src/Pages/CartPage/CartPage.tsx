@@ -30,39 +30,49 @@ function CartPage({LocalStorage}: CartPageProps) {
   }, [LocalStorage.cartItens])
 
   return (
-    <section className={styles.cartSection}>
-      <div className={styles.cartProductsWindow}>
-        <div className={styles.cartProductsDiv}>
-          <div className={styles.cartPageTopButtons}>
-            <Link to='/' className={styles.goBack} ><TiArrowBack className={styles.goBackIcon}/> Voltar</Link>
-            <button className={styles.clearButton} type='button' onClick={LocalStorage.clearCart}>Limpar</button>
+    finish ? (
+      <FinishWindow LocalStorage={LocalStorage} setFinish={setFinish}/>
+    ) : (
+      <section className={styles.cartSection}>
+        <div className={styles.cartProductsWindow}>
+          <div className={styles.cartProductsDiv}>
+            <div className={styles.cartPageTopButtons}>
+              <Link to='/' className={styles.goBack} ><TiArrowBack className={styles.goBackIcon}/> Voltar</Link>
+              <button className={styles.clearButton} type='button' onClick={LocalStorage.clearCart}>Limpar</button>
+            </div>
+            {LocalStorage.cartItens.map((iten: CartItensTypes) => (
+              <CartProductsCard
+                key={iten.id}
+                name={iten.title}
+                price={iten.price}
+                thumbnail={iten.thumbnail ? iten.thumbnail : ''}
+                LocalStorage={LocalStorage}
+                item={iten}
+                quantity={iten.quantity}
+              />
+            ))}
           </div>
-          {LocalStorage.cartItens.map((iten: CartItensTypes) => (
-            <CartProductsCard
-              key={iten.id}
-              name={iten.title}
-              price={iten.price}
-              thumbnail={iten.thumbnail ? iten.thumbnail : ''}
-              LocalStorage={LocalStorage}
-              item={iten}
-              quantity={iten.quantity}
-            />
-          ))}
         </div>
-      </div>
-      { LocalStorage.cartItens.length < 1 ? <EmptyCart /> : (
-        !finish ? (
-          <div className={styles.cartFinishDiv}>
-          <p>Valor total da compra:</p>
-          <p>R${Number(totalValue).toFixed(2)}</p>
-          <button type='button' onClick={() => setFinish(true)}>Finalizar compra</button>
-        </div>
-        ) :
+        { LocalStorage.cartItens.length < 1 ? <EmptyCart /> : (
+            <section className={styles.cartFinishSection}>
+              <div className={styles.finishDiv}>
+                <p>Valor total da compra:</p>
+                <p>R${Number(totalValue).toFixed(2)}</p>
+                <button
+                  className={styles.finishBtn}
+                  type='button'
+                  onClick={() => setFinish(true)}
+                >
+                  Finalizar compra
+                </button>
+              </div>
+            </section>
+          )
+        }
+      </section>
 
-        <FinishWindow LocalStorage={LocalStorage}/>
-      )
-      }
-    </section>
+    )
+
   )
 }
 

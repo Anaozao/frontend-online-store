@@ -1,9 +1,10 @@
 .finishSection {
+  padding: 100px;
   display: flex;
   justify-content: center;
-  flex-grow: 0.8;
-  margin: 0 auto;
+  margin: auto auto;
   align-items: center;
+  height: 80vh;
 }
 
 .finishForm {
@@ -14,6 +15,7 @@
   background-color: antiquewhite;
   min-height: 50%;
   width: 50%;
+  height: 60%;
   border: solid 1px rgba(128, 128, 128, 0.267);
   border-radius: 5px;
 }
@@ -85,4 +87,30 @@
 .cards {
   display: flex;
   gap: 10px;
+}
+
+.finishBtnsDiv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.goBackBtn {
+  font-size: 18px;
+  align-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  height: 30px;
+  width: 50px;
+  border: none;
+  border-radius: 2px;
+  box-shadow: 1px 1px 5px rgb(43, 46, 43);
+  background-color: rgb(116, 235, 116);
+  font-weight: bold;
+ 
+  &:active {
+   box-shadow: 1px 1px 3px rgb(2, 7, 77);
+  }
 }

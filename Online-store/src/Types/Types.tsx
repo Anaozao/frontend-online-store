@@ -87,3 +87,8 @@ export type ProductPageProps = {
     handleRate: (e: React.FormEvent<HTMLButtonElement>) => void;
   }
 }
+
+export type FinishTypes = {
+  LocalStorage: LocalStorageType
+  setFinish: React.Dispatch<React.SetStateAction<boolean>>
+}

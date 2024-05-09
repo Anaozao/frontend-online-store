@@ -1,10 +1,11 @@
 import { useNavigate } from 'react-router-dom'
 import styles from './FinishWindow.module.css'
 import React, { useState } from 'react'
-import { CartPageProps } from '../../Types/Types'
+import { FinishTypes } from '../../Types/Types'
 import { FaBarcode, FaCcDinersClub, FaCcMastercard, FaCcVisa } from 'react-icons/fa6'
+import { TiArrowBack } from 'react-icons/ti'
 
-function FinishWindow({LocalStorage}: CartPageProps) {
+function FinishWindow({LocalStorage, setFinish}: FinishTypes) {
 
   const navigate = useNavigate()
 
@@ -250,15 +251,23 @@ function FinishWindow({LocalStorage}: CartPageProps) {
             </div>
           </div>
         </div>
-
-      <button
-        className={`${styles.formChildrens} ${styles.finishBtn}`}
-        type='submit'
-        onClick={handleFinish}
-        disabled={validateForm()}
+      <div className={styles.finishBtnsDiv}>
+        <button
+          className={styles.goBackBtn}
+          type='button'
+          onClick={() => setFinish(false)}
         >
-          Comprar
-      </button>
+          <TiArrowBack className={styles.goBackIcon}/>
+        </button>
+        <button
+          className={`${styles.formChildrens} ${styles.finishBtn}`}
+          type='submit'
+          onClick={handleFinish}
+          disabled={validateForm()}
+          >
+            Comprar
+        </button>
+      </div>
       </form>
     </section>
   )

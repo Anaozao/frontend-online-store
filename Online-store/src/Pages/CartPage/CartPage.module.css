@@ -5,7 +5,7 @@
   /* width: 100%; */
 }
 
-.cartFinishDiv {
+.cartFinishSection {
   display: flex;
   flex-grow: 1;
   flex-direction: column;
@@ -13,8 +13,37 @@
   align-items: center;
 }
 
-.cartFinishDiv :nth-child(1) {
+.finishDiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.finishDiv :nth-child(1) {
   font-size: 25px;
+
+}
+
+.finishDiv :nth-child(2) {
+  font-size: 20px;
+
+}
+
+.finishBtn {
+  cursor: pointer;
+  height: 30px;
+  width: 200px;
+  border: none;
+  border-radius: 2px;
+  box-shadow: 1px 1px 5px rgb(43, 46, 43);
+  background-color: rgb(116, 235, 116);
+  font-weight: bold;
+ 
+  &:active {
+   box-shadow: 1px 1px 3px rgb(2, 7, 77);
+  }
 }
 
 .goBack {

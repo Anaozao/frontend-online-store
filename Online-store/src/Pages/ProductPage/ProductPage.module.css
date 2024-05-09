@@ -6,6 +6,7 @@
 }
 
 .productDiv {
+  width: 100%;
   display: flex;
   margin-top: 50px;
   margin-left: 40px;
@@ -40,6 +41,7 @@
   flex-direction: column;
   flex-grow: 1;
   height: 100%;
+  margin-right: 80px;
 }
 
 .productInfoDiv {
@@ -97,23 +99,40 @@
 }
 
 .rateSection {
+  background-color: rgba(120, 120, 219, 0.116);
+  border: 1px solid rgba(0, 0, 0, 0.329);
+  border-radius: 10px;
   margin-top: 30px;
-  width: 100%;
+  width: 80%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  align-self: center;
+}
+
+.rateTitle{
+  margin-top: 30px;
 }
 
 .rateForm {
+  background-color: rgba(128, 128, 128, 0.349);
+  padding: 15px 15px;
   margin-top: 15px;
   display: flex;
   flex-direction: column;
   gap: 10px;
+  box-shadow: 1px 1px 4px;
+}
+
+.selInfos {
+  display: flex;
+  flex-direction: column;
 }
 
 .rateTextarea {
   resize: none;
+  border-radius: 5px;
 }
 
 .rateEmail {
@@ -121,6 +140,17 @@
   height: 30px;
   margin-left: 5px;
   text-align: center;
+  border: none;
+  border-radius: 3px;
+}
+
+.rateName {
+  width: 200px;
+  height: 30px;
+  margin-left: 5px;
+  text-align: center;
+  border: none;
+  border-radius: 3px;
 }
 
 .rateBtnDiv {

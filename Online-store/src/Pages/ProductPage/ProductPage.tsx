@@ -95,12 +95,20 @@ function ProductPage({LocalStorage, RatesLocalStorage }: ProductPageProps,) {
               <div className={styles.quantity}>{quantity}</div>
               <span role='button' onClick={handleAdd} ><IoAddOutline className={styles.add}/></span>
             </div>
-            <button type='button' onClick={handleAddToCart} className={styles.addToCart}>Adicionar ao carrinho</button>
+            <div>
+              <button
+                type='button'
+                onClick={handleAddToCart}
+                className={styles.addToCart}
+              >
+                Adicionar ao carrinho
+              </button>
+            </div>
           </div>
         </div>
       </div>
       <section className={styles.rateSection}>
-        <h3>Avaliações</h3>
+        <h3 className={styles.rateTitle}>Avaliações</h3>
         <form className={styles.rateForm}>
           <div className={styles.selInfos}>
             <div>
