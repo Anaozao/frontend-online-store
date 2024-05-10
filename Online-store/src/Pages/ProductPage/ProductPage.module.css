@@ -6,7 +6,7 @@
 }
 
 .productDiv {
-  width: 100%;
+  width: 97.8%;
   display: flex;
   margin-top: 50px;
   margin-left: 40px;
@@ -16,7 +16,7 @@
 
 .nameAndImage {
   background-color: white;
-  max-width: 600px;
+  width: 40%;
   max-height: 600px;
   display: flex;
   flex-flow: column;
@@ -30,8 +30,7 @@
 }
 
 .productImg {
-  width: 300px;
-  height: 300px;
+  width: 50%;
   /* margin-top: auto; */
 }
 
@@ -102,6 +101,7 @@
   background-color: rgba(120, 120, 219, 0.116);
   border: 1px solid rgba(0, 0, 0, 0.329);
   border-radius: 10px;
+  margin-bottom: 30px;
   margin-top: 30px;
   width: 80%;
   display: flex;
@@ -186,15 +186,28 @@
 .rates {
   border-radius: 10px;
   margin-top: 30px;
+  margin-bottom: 30px;
   min-height: 400px;
   width: 80%;
   background-color: white;
+  gap: 15px
 }
 
-.rate {
+.rateDiv {
+  background-color: rgba(0, 0, 0, 0.055);
   border-bottom: solid rgba(0, 0, 0, 0.144) 1px;
+  display: flex;
+  flex-direction: column;
   margin-top: 20px;
   margin-left: 20px;
   padding-bottom: 10px;
   width: 50%;
+}
+
+.rate {
+  margin: 10px 0 0 10px;
+}
+
+.rateDiv:last-child {
+  margin-bottom: 15px;
 }

@@ -156,10 +156,12 @@ function ProductPage({LocalStorage, RatesLocalStorage }: ProductPageProps,) {
         </form>
         <section className={styles.rates}>
           {productRates.map((rate, index) => (
-            <div key={index} className={styles.rate}>
-              <p>{rate.rateName}</p>
-              <p>{rate.rateEmail}</p>
-              <p>{rate.rateTextarea}</p>
+            <div key={index} className={styles.rateDiv}>
+              <div className={styles.rate}>
+                <p>{rate.rateName}</p>
+                <p>{rate.rateEmail}</p>
+                <p>{rate.rateTextarea}</p>
+              </div>
             </div>
           ))}
         </section>
