@@ -21,7 +21,8 @@ function useLocalStorage() {
         return itens;
 
       } else {
-        const itens =  [...prevItens, item]
+        const newItem = {...item, quantity: 1}
+        const itens =  [...prevItens, newItem]
         localStorage.setItem('cartItens', JSON.stringify([...itens]))
         return itens;
 

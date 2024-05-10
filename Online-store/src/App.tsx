@@ -130,7 +130,7 @@ function App() {
         element={<Layout
           onChange={handleSeachChange}
           onSearch={handleSearch}
-          cartItens={LOCALSTORAGE.cartItens}
+          LocalStorage={LOCALSTORAGE}
           />}
         >
             <Route index element={<Home

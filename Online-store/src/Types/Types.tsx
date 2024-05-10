@@ -8,7 +8,7 @@ export type CartProductsCardProps = {
 }
 
 export type HeaderProps = {
-  cartItens: CartItensTypes[]
+  LocalStorage: LocalStorageType;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onSearch: (e: React.FormEvent<HTMLButtonElement>) => Promise<void>;
 }

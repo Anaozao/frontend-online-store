@@ -5,9 +5,9 @@ import { Link } from "react-router-dom";
 import { HiShoppingBag } from "react-icons/hi";
 import { HeaderProps } from "../../Types/Types";
 
-function Header({cartItens, onChange, onSearch}: HeaderProps) {
+function Header({LocalStorage, onChange, onSearch}: HeaderProps) {
 
-  const quantity = cartItens.reduce((acc, item) => {
+  const quantity = LocalStorage.cartItens.reduce((acc, item) => {
     return acc += item.quantity || 1
   }, 0)
 
