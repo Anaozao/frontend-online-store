@@ -42,6 +42,7 @@ function FinishWindow({LocalStorage, setFinish}: FinishTypes) {
     const regexEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     const regexCpf = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/
     const regexPhone = /^\(\d{2}\) \d{5}-\d{4}$/
+    const regexCep = /^\d{5}-\d{3}$/
     
 
     return (
@@ -49,7 +50,7 @@ function FinishWindow({LocalStorage, setFinish}: FinishTypes) {
       || !(adress.length > 2)
       || !(city.length > 2)
       || !(adressNumber.length > 0)
-      || !(cep.length === 8)
+      || !regexCep.test(cep)
       || !regexCpf.test(cpf)
       || state === ''
       || !(fullName.length > 3)
@@ -99,16 +100,6 @@ function FinishWindow({LocalStorage, setFinish}: FinishTypes) {
           />
 
           <label htmlFor="cpf-input"></label>
-          {/* <input
-            className={styles.infoInputs}
-            onChange={handleChange}
-            type="text"
-            id='cpf-input'
-            name='cpf'
-            maxLength={11}
-            placeholder='cpf (somente os números)'
-            value={formInputs.cpf}
-          /> */}
           <InputMask
             mask='999.999.999-99'
             type="text"
@@ -116,6 +107,7 @@ function FinishWindow({LocalStorage, setFinish}: FinishTypes) {
             name='cpf'
             className={styles.infoInputs}
             onChange={handleChange}
+            placeholder='CPF'
           >
           </InputMask>
         </div>
@@ -133,16 +125,6 @@ function FinishWindow({LocalStorage, setFinish}: FinishTypes) {
           />
 
           <label htmlFor="phone-input"></label>
-          {/* <input
-            className={styles.infoInputs}
-            onChange={handleChange}
-            type="text"
-            id='phone-input'
-            name='phone'
-            maxLength={11}
-            placeholder='Telefone (somente os númeos)'
-            value={formInputs.phone}
-          /> */}
           <InputMask 
             mask='(99) 99999-9999' 
             value={formInputs.phone} 
@@ -150,24 +132,25 @@ function FinishWindow({LocalStorage, setFinish}: FinishTypes) {
             name='phone'
             id='phone-input'
             className={styles.infoInputs}
-            // type="text"
-            // maxLength={11}
-            // placeholder='Telefone (somente os númeos)'
+            placeholder='Telefone'
+            type="text"
             > 
           </InputMask>
         </div>
 
         <div className={styles.formChildrens}>
           <label htmlFor="cep-input"></label>
-          <input
-            className={styles.infoInputs}
+          <InputMask
+            mask='99999-999'
             onChange={handleChange}
             type="text"
             id='cep-input'
             name='cep'
             placeholder='CEP'
             value={formInputs.cep}
-          />
+            className={styles.infoInputs}
+          >
+          </InputMask>
 
           <label htmlFor="adress-input"></label>
           <input

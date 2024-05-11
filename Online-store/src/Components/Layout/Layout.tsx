@@ -6,12 +6,16 @@ type LayoutProps = {
   LocalStorage: LocalStorageType
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   onSearch: (e: React.FormEvent<HTMLButtonElement>) => Promise<void>
+  searchValue: {
+    search: string;
+}
 }
 
-function Layout({LocalStorage, onChange, onSearch}: LayoutProps) {
+function Layout({LocalStorage, onChange, onSearch, searchValue}: LayoutProps) {
   return (
     <>
       <Header
+        searchValue={searchValue}
         onChange={onChange}
         onSearch={onSearch}
         LocalStorage={LocalStorage}

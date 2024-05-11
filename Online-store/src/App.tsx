@@ -50,12 +50,13 @@ function App() {
   }
 
   const handleSearch = async (e: React.FormEvent<HTMLButtonElement>) => {
+    setOffset(0)
     e.preventDefault()
     setProductList([])
     setSearchLoading(true)
     setOffset(0)
     try {
-      const response = await getByName(searchInputValue.search, offset)
+      const response = await getByName(searchInputValue.search, 0)
       console.log(response.results)
       setProductList(response.results)
     } catch (error) {
@@ -68,11 +69,12 @@ function App() {
   }
 
   const handleCategory = async (e: string) => {
+    setSearchInputValue({search: ''})
     setProductList([])
     setSearchLoading(true)
     setOffset(0)
     try {
-      const response = await getCategory(e, offset)
+      const response = await getCategory(e, 0)
       setProductList(response.results)
     } catch (error) {
       console.error(error)
@@ -131,6 +133,7 @@ function App() {
           onChange={handleSeachChange}
           onSearch={handleSearch}
           LocalStorage={LOCALSTORAGE}
+          searchValue={searchInputValue}
           />}
         >
             <Route index element={<Home

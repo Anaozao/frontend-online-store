@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { HiShoppingBag } from "react-icons/hi";
 import { HeaderProps } from "../../Types/Types";
 
-function Header({LocalStorage, onChange, onSearch}: HeaderProps) {
+function Header({LocalStorage, onChange, onSearch, searchValue}: HeaderProps) {
 
   const quantity = LocalStorage.cartItens.reduce((acc, item) => {
     return acc += item.quantity || 1
@@ -18,6 +18,7 @@ function Header({LocalStorage, onChange, onSearch}: HeaderProps) {
           <label htmlFor="search-input"></label>
           <input
             onChange={onChange}
+            value={searchValue.search}
             className={styles.searchInput}
             type="text"
             id="search-input"

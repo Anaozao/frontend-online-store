@@ -11,6 +11,9 @@ export type HeaderProps = {
   LocalStorage: LocalStorageType;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onSearch: (e: React.FormEvent<HTMLButtonElement>) => Promise<void>;
+  searchValue: {
+    search: string
+  }
 }
 
 export type HomeProps = {
