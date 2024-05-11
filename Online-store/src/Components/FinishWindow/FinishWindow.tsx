@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import { FinishTypes } from '../../Types/Types'
 import { FaBarcode, FaCcDinersClub, FaCcMastercard, FaCcVisa } from 'react-icons/fa6'
 import { TiArrowBack } from 'react-icons/ti'
+import InputMask from 'react-input-mask';
 
 function FinishWindow({LocalStorage, setFinish}: FinishTypes) {
 
@@ -39,6 +40,9 @@ function FinishWindow({LocalStorage, setFinish}: FinishTypes) {
     } = formInputs
 
     const regexEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const regexCpf = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/
+    const regexPhone = /^\(\d{2}\) \d{5}-\d{4}$/
+    
 
     return (
       !regexEmail.test(email)
@@ -46,20 +50,25 @@ function FinishWindow({LocalStorage, setFinish}: FinishTypes) {
       || !(city.length > 2)
       || !(adressNumber.length > 0)
       || !(cep.length === 8)
-      || !(cpf.length === 11)
+      || !regexCpf.test(cpf)
       || state === ''
       || !(fullName.length > 3)
-      || !(phone.length < 12 && phone.length > 9)
+      || !regexPhone.test(phone)
     )
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    setFormInputs((prevState) => (
-      {
+    setFormInputs((prevState) => {
+      const updateData = {
         ...prevState,
-        [e.target.name]: e.target.value
+        [e.target.name]: e.target.value,
       }
-    ))
+      // if (e.target.name === 'phone') {
+      //   updateData.phone = formatarTelefone(e.target.value)
+      // }
+      console.log(validateForm())
+      return updateData
+    })
   }
 
   const handleCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -90,7 +99,7 @@ function FinishWindow({LocalStorage, setFinish}: FinishTypes) {
           />
 
           <label htmlFor="cpf-input"></label>
-          <input
+          {/* <input
             className={styles.infoInputs}
             onChange={handleChange}
             type="text"
@@ -99,7 +108,16 @@ function FinishWindow({LocalStorage, setFinish}: FinishTypes) {
             maxLength={11}
             placeholder='cpf (somente os números)'
             value={formInputs.cpf}
-          />
+          /> */}
+          <InputMask
+            mask='999.999.999-99'
+            type="text"
+            id='cpf-input'
+            name='cpf'
+            className={styles.infoInputs}
+            onChange={handleChange}
+          >
+          </InputMask>
         </div>
 
         <div className={styles.formChildrens}>
@@ -115,7 +133,7 @@ function FinishWindow({LocalStorage, setFinish}: FinishTypes) {
           />
 
           <label htmlFor="phone-input"></label>
-          <input
+          {/* <input
             className={styles.infoInputs}
             onChange={handleChange}
             type="text"
@@ -124,7 +142,19 @@ function FinishWindow({LocalStorage, setFinish}: FinishTypes) {
             maxLength={11}
             placeholder='Telefone (somente os númeos)'
             value={formInputs.phone}
-          />
+          /> */}
+          <InputMask 
+            mask='(99) 99999-9999' 
+            value={formInputs.phone} 
+            onChange={handleChange}
+            name='phone'
+            id='phone-input'
+            className={styles.infoInputs}
+            // type="text"
+            // maxLength={11}
+            // placeholder='Telefone (somente os númeos)'
+            > 
+          </InputMask>
         </div>
 
         <div className={styles.formChildrens}>
