@@ -25,11 +25,8 @@ function useLocalStorage() {
         const itens =  [...prevItens, newItem]
         localStorage.setItem('cartItens', JSON.stringify([...itens]))
         return itens;
-
       }
-      
     }
-  
   )}
 
   const removeItem = (id: string) => {

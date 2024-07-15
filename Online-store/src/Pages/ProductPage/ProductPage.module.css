@@ -17,12 +17,12 @@
 .nameAndImage {
   background-color: white;
   width: 40%;
-  max-height: 600px;
+  height: 600px;
   display: flex;
   flex-flow: column;
   box-shadow: 1px 1px 5px black;
   align-items: center;
-  gap: 8rem;
+  gap: 20px;
 }
 
 .productName {
